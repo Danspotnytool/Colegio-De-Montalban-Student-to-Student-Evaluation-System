@@ -1,0 +1,313 @@
+<mxfile host="65bd71144e">
+    <diagram id="-2bOTFpfhWAZHsft4R8H" name="Page-1">
+        <mxGraphModel dx="2080" dy="1213" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" parent="1" source="2" target="3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Evaluation Page" style="shape=offPageConnector;whiteSpace=wrap;html=1;strokeWidth=1;fontFamily=Helvetica;fontSize=10;size=0.25;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="40" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="3" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Display Evaluation&lt;br style=&quot;font-size: 10px;&quot;&gt;Page" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;fontSize=10;rounded=0;fontFamily=Helvetica;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="160" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="5" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="subjectStudentNumber&lt;br&gt;&lt;br&gt;evaluationMessage" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="280" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="9" target="31" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="subjectStudentNumber&lt;br&gt;&lt;br&gt;evaluationMessage" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;size=20;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="400" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="11" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Validate subjectStudentNumber and evaluationMessage" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="600" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="16" target="19" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="22" vertex="1" connectable="0">
+                    <mxGeometry x="-0.54" y="-1" relative="1" as="geometry">
+                        <mxPoint x="1" y="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" parent="1" source="16" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="340" y="740"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="26" vertex="1" connectable="0">
+                    <mxGeometry x="-0.9179" y="-4" relative="1" as="geometry">
+                        <mxPoint x="1" y="-4" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="Is there a&lt;br style=&quot;font-size: 10px;&quot;&gt;subjectStudentNumber and&lt;br&gt;evaluationMessage?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry y="680" width="200" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=0;" parent="1" source="19" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="340" y="740" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="340" y="940"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="27" vertex="1" connectable="0">
+                    <mxGeometry x="-0.8686" relative="1" as="geometry">
+                        <mxPoint x="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="35" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="19" target="34" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="35" vertex="1" connectable="0">
+                    <mxGeometry x="-0.4592" y="-1" relative="1" as="geometry">
+                        <mxPoint x="1" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="Are the&amp;nbsp;&lt;br&gt;subjectStudentNumber and&lt;br&gt;evaluationMessage&lt;br style=&quot;font-size: 10px;&quot;&gt;formatted right?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry y="880" width="200" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;rounded=0;" parent="1" source="24" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="100" y="380" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="Display&lt;br&gt;Error Message" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="340" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="31" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Wait for student to press &quot;Submit&quot;" style="shape=delay;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Helvetica;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="520" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=0;" parent="1" source="34" target="37" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="Send subjectStudentNumber and evaluationMessage to the server" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry y="1080" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="Backend&lt;br&gt;Evaluation" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="1080" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=0;" parent="1" source="39" target="41" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="480" y="80"/>
+                            <mxPoint x="480" y="60"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="Backend&lt;br&gt;Evaluation" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="360" y="40" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="41" target="44" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="Validate subjectStudentNumber and evaluationMessage" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="40" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="44" target="46" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="42" vertex="1" connectable="0">
+                    <mxGeometry x="-0.54" y="-1" relative="1" as="geometry">
+                        <mxPoint x="1" y="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="53" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=0;" parent="1" source="44" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="740" y="380" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="740" y="180"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="55" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="53" vertex="1" connectable="0">
+                    <mxGeometry x="-0.9256" y="1" relative="1" as="geometry">
+                        <mxPoint x="10" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="44" value="Is there a&lt;br style=&quot;font-size: 10px;&quot;&gt;subjectStudentNumber and&lt;br&gt;evaluationMessage?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="120" width="200" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;rounded=0;" parent="1" source="46" target="51" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="52" vertex="1" connectable="0">
+                    <mxGeometry x="-0.8083" y="-1" relative="1" as="geometry">
+                        <mxPoint x="12" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="67" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="46" target="66" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="77" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="67" vertex="1" connectable="0">
+                    <mxGeometry x="-0.8094" y="-2" relative="1" as="geometry">
+                        <mxPoint x="2" y="13" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="46" value="Are the&amp;nbsp;&lt;br&gt;subjectStudentNumber and&lt;br&gt;evaluationMessage&lt;br style=&quot;font-size: 10px;&quot;&gt;formatted right?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="320" width="200" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;rounded=0;" parent="1" source="49" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="340" y="459.9047619047618" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="49" value="Frontend Error" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="440" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="Frontend Error" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="760" y="360" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" parent="1" source="56" target="59" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="Check the&lt;br&gt;database for the subjectStudentNumber" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="760" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="63" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="59" target="62" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="Students" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="840" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="72" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=0;" parent="1" source="62" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="740" y="640" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="740" y="1020"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="75" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="72" vertex="1" connectable="0">
+                    <mxGeometry x="-0.9464" y="2" relative="1" as="geometry">
+                        <mxPoint x="8" y="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="79" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="62" target="78" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="79" vertex="1" connectable="0">
+                    <mxGeometry x="0.2776" y="1" relative="1" as="geometry">
+                        <mxPoint x="-1" y="-32" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="62" value="Does the&lt;br&gt;subjectStudentNumber&lt;br&gt;exists in the database?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="960" width="200" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="66" target="68" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="Check evaluationMessage&lt;br&gt;&amp;nbsp;for profanity" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="520" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="68" target="56" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="70" vertex="1" connectable="0">
+                    <mxGeometry x="-0.5935" y="2" relative="1" as="geometry">
+                        <mxPoint x="-2" y="3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="71" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;rounded=0;" parent="1" source="68" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="740" y="380" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="740" y="640"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="73" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];rounded=0;" parent="71" vertex="1" connectable="0">
+                    <mxGeometry x="-0.9394" y="3" relative="1" as="geometry">
+                        <mxPoint x="9" y="3" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="68" value="Are there any&lt;br&gt;profanity on&lt;br&gt;evaluationMessage?" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="600" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="78" target="84" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="78" value="Save the evaluationMessage to the database" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1160" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="84" target="87" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="84" value="Generate Evaluation ID" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1240" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" parent="1" source="87" target="89" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="evaluationID" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1320" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="92" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="89" target="91" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="Evaluations" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1440" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" parent="1" source="91" target="93" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="91" value="Add the evaluationID to the evaluations list of the student evaluating" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1560" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="93" target="96" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" value="Students" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1640" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="100" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="96" target="99" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="96" value="Send &quot;SUCCESS&quot; response to the frontend" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="1760" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" value="Frontend&lt;br&gt;Evaluation" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="540" y="1840" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="101" target="102" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="Frontend&lt;br&gt;Evaluation" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="1240" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;rounded=0;" parent="1" source="102" target="104" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="102" value="Clear input fields" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;strokeWidth=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="1360" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;rounded=0;" parent="1" source="104" target="107" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="Display&lt;br&gt;Success Message" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;fontSize=10;fontFamily=Helvetica;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="1440" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="Dashboard Buttons" style="shape=offPageConnector;whiteSpace=wrap;html=1;strokeWidth=1;fontFamily=Helvetica;fontSize=10;size=0.25;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="1560" width="80" height="80" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

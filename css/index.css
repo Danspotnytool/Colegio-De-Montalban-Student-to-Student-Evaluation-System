@@ -1,0 +1,166 @@
+:root {
+	--color-primary: #0b3e06;
+	--color-primary-complement: #fcb72e;
+	--color-secondary: #006503;
+	--color-tertiary: #04863c;
+	--color-plain: #f2f2f2;
+	--color-plain-complement: #1e1e1e;
+
+	--color-shade-light: #ffffff;
+	--color-shade-dark: #000000;
+
+	--transition-speed: 0.25s;
+}
+
+html {
+	font-size: calc(62.5% / 1.25);
+	scroll-behavior: smooth;
+	background-color: var(--color-plain);
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		"Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	line-height: 1;
+}
+body {
+	image-rendering: crisp-edges;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+	font-size: 2rem;
+}
+a {
+	text-decoration: underline;
+	color: inherit;
+	transition: var(--transition-speed);
+}
+a:hover {
+	filter: invert(0.25);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 1rem;
+}
+::-webkit-scrollbar-track {
+	background: var(--color-plain);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--color-tertiary);
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-primary);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Lora", "Times New Roman";
+}
+h1 {
+	font-size: 2rem;
+}
+h2 {
+	font-size: 4rem;
+}
+h3 {
+	font-size: 3.5rem;
+}
+h4 {
+	font-size: 3rem;
+}
+h5 {
+	font-size: 2.5rem;
+}
+h6 {
+	font-size: 2rem;
+}
+p {
+	font-size: 2rem;
+}
+@media screen and (max-width: 70rem) {
+	html {
+		font-size: calc(62.5% / 1.25);
+	}
+}
+@media screen and (max-width: 40rem) {
+	html {
+		font-size: calc(62.5% / 1.5);
+	}
+}
+
+.textInput {
+	width: 100%;
+	gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.textInput label {
+	width: 100%;
+	text-align: left;
+}
+.textInput input {
+	width: 100%;
+	padding: 1rem 2rem;
+	border: solid 0.4rem var(--color-tertiary);
+	border-radius: 10rem;
+	outline: unset;
+	font-size: 1.5rem;
+	background-color: var(--color-shade-light);
+	transition: var(--transition-speed);
+}
+.textInput input:focus {
+	border: solid 0.4rem var(--color-primary);
+}
+
+.button {
+	padding: 1rem 4rem;
+	border: unset;
+	border-radius: 10rem;
+	color: var(--color-shade-light);
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+}
+.button * {
+	position: relative;
+	z-index: 1;
+}
+.button::before {
+	content: "";
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background-color: var(--color-tertiary);
+	display: block;
+	position: absolute;
+	z-index: 0;
+}
+.button::after {
+	content: "";
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background-color: var(--color-primary);
+	display: block;
+	position: absolute;
+	z-index: 0;
+	transform: translateX(50%) translateY(50%) scale(0);
+	transform-origin: 0;
+	transition: var(--transition-speed);
+}
+.button:hover::after {
+	transform: translateX(0) translateY(0) scale(200%) rotate(360deg);
+}

@@ -1,0 +1,75 @@
+html {
+	background-color: var(--color-tertiary);
+}
+
+body {
+	position: relative;
+}
+body::before {
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background: linear-gradient(
+		to bottom right,
+		var(--color-tertiary),
+		var(--color-primary)
+	);
+	display: block;
+	position: fixed;
+	z-index: -2;
+}
+body::after {
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background-image: url("../assets/CDM\ Pic.jpg");
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: color;
+	display: block;
+	position: fixed;
+	opacity: 0.25;
+	z-index: -1;
+}
+
+#main {
+	min-height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#loginPanel {
+	padding: 8rem 4rem;
+	gap: 4rem;
+	border: solid 0.4rem var(--color-primary);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--color-plain);
+}
+#main #header {
+	gap: 0.8rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#main #header img {
+	height: 12rem;
+}
+#loginForm {
+	width: 100%;
+	gap: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
