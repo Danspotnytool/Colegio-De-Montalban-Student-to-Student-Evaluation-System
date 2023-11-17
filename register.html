@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Colegio De Montalban Student to Student Evaluation System</title>
+
+    <link rel="shortcut icon" href="./assets/CDM Logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="./fonts/font-face.css">
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="registerPanel">
+            <div id="header">
+                <img src="./assets/CDM Logo.png" alt="CDM Logo">
+                <div>
+                    <h2>Student to Student</h2>
+                    <h3>Evaluation System</h3>
+                </div>
+            </div>
+
+
+
+            <form action="/register.html" method="POST" id="registerForm">
+                <span id="fullName">
+                    <div class="textInput">
+                        <label for="firstName">
+                            <h6>First Name</h6>
+                        </label>
+                        <input required type="text" name="firstName" id="firstName" placeholder="John">
+                    </div>
+
+                    <div class="textInput">
+                        <label for="middleName">
+                            <h6>Middle Name</h6>
+                        </label>
+                        <input required type="text" name="middleName" id="middleName" placeholder="Dougma">
+                    </div>
+
+                    <div class="textInput">
+                        <label for="lastName">
+                            <h6>Middle Name</h6>
+                        </label>
+                        <input required type="text" name="lastName" id="lastName" placeholder="Backt">
+                    </div>
+                </span>
+
+
+
+                <div class="textInput">
+                    <label for="studentNumber">
+                        <h6>Student Number</h6>
+                    </label>
+                    <input required type="text" name="studentNumber" id="studentNumber" placeholder="20-00001">
+                </div>
+
+                <div class="textInput">
+                    <label for="emailAddress">
+                        <h6>Email</h6>
+                    </label>
+                    <input required type="email" name="emailAddress" id="emailAddress" placeholder="example@gmail.com">
+                </div>
+
+
+
+                <span>
+                    <div id="genderInput">
+                        <label for="gender">
+                            <h6>Gender</h6>
+                        </label>
+                        <!-- <input required type="password" name="password" id="password" placeholder="********"> -->
+                        <select required name="gender" id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="preferNotToSay">Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="textInput">
+                        <label for="birthday">
+                            <h6>Birthday</h6>
+                        </label>
+                        <input required type="date" name="birthday" id="birthday" placeholder="mm/dd/yy">
+                    </div>
+
+                    <div class="textInput">
+                        <label for="profilePicture">
+                            <h6>Profile Picture</h6>
+                        </label>
+                        <input required type="file" name="profilePicture" id="profilePicture" placeholder="Upload">
+                    </div>
+                </span>
+
+
+
+                <div class="textInput">
+                    <label for="password">
+                        <h6>Password</h6>
+                    </label>
+                    <input required type="password" name="password" id="password" placeholder="#############">
+                </div>
+
+                <div class="textInput">
+                    <label for="confirmPassword">
+                        <h6>Confirm</h6>
+                    </label>
+                    <input required type="confirmPassword" name="confirmPassword" id="confirmPassword"
+                        placeholder="#############">
+                </div>
+
+                <button type="submit" class="button">
+                    <p><b>Register</b></p>
+                </button>
+            </form>
+            <p><a href="login">I am already registered</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

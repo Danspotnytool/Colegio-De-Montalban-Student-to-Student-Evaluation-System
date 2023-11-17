@@ -103,23 +103,25 @@ p {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: stretch;
+	position: relative;
 }
-.textInput label {
-	width: 100%;
+.textInput label,
+.textInput label h6  {
 	text-align: left;
 }
-.textInput input {
-	width: 100%;
+input {
+	height: 4rem;
 	padding: 1rem 2rem;
 	border: solid 0.4rem var(--color-tertiary);
 	border-radius: 10rem;
 	outline: unset;
-	font-size: 1.5rem;
+	font-size: 1.75rem;
 	background-color: var(--color-shade-light);
 	transition: var(--transition-speed);
+	position: relative;
 }
-.textInput input:focus {
+input:focus {
 	border: solid 0.4rem var(--color-primary);
 }
 
@@ -163,4 +165,9 @@ p {
 }
 .button:hover::after {
 	transform: translateX(0) translateY(0) scale(200%) rotate(360deg);
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+	display: none;
+	position: absolute;
 }
