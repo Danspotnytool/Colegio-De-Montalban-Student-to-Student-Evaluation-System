@@ -1,5 +1,5 @@
 html {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-secondary);
 }
 
 body {
@@ -11,11 +11,7 @@ body::before {
 	width: 100vw;
 	top: 0;
 	left: 0;
-	background: linear-gradient(
-		to bottom right,
-		var(--color-tertiary),
-		var(--color-primary)
-	);
+	background: var(--color-gradient);
 	display: block;
 	position: fixed;
 	z-index: -2;
@@ -68,13 +64,14 @@ body::after {
 }
 #registerForm {
 	width: 100%;
-	gap: 1rem;
+	gap: 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 #registerForm > span {
+	width: 100%;
 	gap: 1rem;
 	display: inline-flex;
 	flex-direction: row;
@@ -87,7 +84,7 @@ body::after {
 #registerForm > span ~ select {
 	width: 18rem;
 	padding: 1rem 2rem;
-	border: solid 0.4rem var(--color-tertiary);
+	border: solid 0.4rem var(--color-secondary);
 	border-radius: 10rem;
 	outline: unset;
 	font-size: 1.5rem;
@@ -110,7 +107,7 @@ body::after {
 	height: 1.5rem;
 	width: 0.5rem;
 	top: calc(100% - 2.75rem);
-	background-color: var(--color-tertiary);
+	background-color: var(--color-secondary);
 	display: block;
 	position: absolute;
 	z-index: 1;
@@ -131,7 +128,7 @@ body::after {
 	appearance: none;
 	-webkit-appearance: none;
 	padding: 1rem 2rem;
-	border: solid 0.4rem var(--color-tertiary);
+	border: solid 0.4rem var(--color-secondary);
 	border-radius: 10rem;
 	outline: unset;
 	font-size: 1.5rem;

@@ -1,5 +1,5 @@
 html {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-secondary);
 }
 
 body {
@@ -11,11 +11,7 @@ body::before {
 	width: 100vw;
 	top: 0;
 	left: 0;
-	background: linear-gradient(
-		to bottom right,
-		var(--color-tertiary),
-		var(--color-primary)
-	);
+	background: var(--color-gradient);
 	display: block;
 	position: fixed;
 	z-index: -2;
