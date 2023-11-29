@@ -1,0 +1,49 @@
+
+html {
+	background-color: var(--color-secondary);
+}
+
+body {
+	position: relative;
+}
+body::before {
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background: var(--color-gradient);
+	display: block;
+	position: fixed;
+	z-index: -2;
+}
+body::after {
+	content: "";
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background-image: url("../assets/CDM\ Pic.jpg");
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: color;
+	display: block;
+	position: fixed;
+	opacity: 0.25;
+	z-index: -1;
+}
+
+#main {
+    min-height: 100vh;
+    width: 100%;
+    gap: 2rem;
+    color: var(--color-shade-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#main > img {
+    width: 40rem;
+    height: 40rem;
+}
