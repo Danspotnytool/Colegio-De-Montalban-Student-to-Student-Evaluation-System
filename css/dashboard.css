@@ -1,0 +1,104 @@
+html {
+	background-color: var(--color-plain);
+}
+
+#sidebarButton {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 8rem;
+    width: 8rem;
+    left: 0;
+    border: none;
+    border-radius: 0;
+    background-color: unset;
+    position: absolute;
+    z-index: 2;
+	transition: var(--transition-speed);
+}
+#sidebarButton + svg {
+    height: 8rem;
+    width: 8rem;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    transform: rotateY(180deg);
+	transition: var(--transition-speed);
+}
+#sidebarButton + svg path {
+    fill: var(--color-plain-complement);
+	transition: var(--transition-speed);
+}
+#sidebarButton:checked + svg path {
+    fill: var(--color-plain);
+}
+#sidebarButton:checked {
+    left: calc(40rem - 8rem);
+}
+#sidebarButton:checked + svg {
+    transform: rotateY(0deg);
+    left: calc(40rem - 8rem);
+}
+#sidebarButton:checked + svg + #sidebarPanel {
+    left: 0;
+}
+
+#sidebarPanel {
+    height: 100vh;
+    width: 40rem;
+    padding: 4rem;
+    gap: 4rem;
+    left: -40rem;
+    background-color: var(--color-secondary);
+    color: var(--color-shade-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+	transition: var(--transition-speed);
+}
+
+#header {
+	gap: 0.8rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    text-align: center;
+}
+#header > img {
+	height: 16rem;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    padding: 4rem 0;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+#map > .page {
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-decoration: none;
+    position: relative;
+}
+#map > .page.active::before {
+    content: '';
+    height: 2.5rem;
+    width: 0.5rem;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: var(--color-shade-light);
+    position: absolute;
+}
