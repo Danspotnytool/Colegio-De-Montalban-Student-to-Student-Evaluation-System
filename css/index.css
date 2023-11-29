@@ -91,6 +91,9 @@ h6 {
 p {
 	font-size: 2rem;
 }
+p.postscript {
+	font-size: 1.5rem;
+}
 @media screen and (max-width: 70rem) {
 	html {
 		font-size: calc(62.5% / 1.5);
