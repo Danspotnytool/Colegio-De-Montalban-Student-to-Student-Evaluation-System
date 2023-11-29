@@ -140,6 +140,8 @@ input:focus {
 	border: unset;
 	border-radius: 10rem;
 	color: var(--color-shade-light);
+	text-decoration: none;
+	display: inline-flex;
 	position: relative;
 	cursor: pointer;
 	overflow: hidden;
@@ -150,6 +152,9 @@ input:focus {
 .button.sub:hover {
 	color: var(--color-shade-light);
 	transition: color var(--transition-speed);
+}
+.button:hover {
+	filter: unset;
 }
 .button * {
 	position: relative;
