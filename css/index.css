@@ -26,6 +26,7 @@ html {
 	font-size: calc(62.5% / 1.25);
 	scroll-behavior: smooth;
 	background-color: var(--color-plain);
+	overflow-x: hidden;
 }
 * {
 	margin: 0;
@@ -106,7 +107,7 @@ p.postscript {
 }
 @media screen and (max-width: 50rem) {
 	html {
-		font-size: calc(62.5% / 1.75);
+		font-size: calc(62.5% / 1.5);
 	}
 }
 
