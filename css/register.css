@@ -72,7 +72,7 @@ body::after {
 }
 #registerForm > span {
 	width: 100%;
-	gap: 1rem;
+	gap: 2rem;
 	display: inline-flex;
 	flex-direction: row;
 	justify-content: center;
