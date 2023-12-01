@@ -83,10 +83,10 @@ body::after {
 	width: 18rem;
 }
 
-#birthday {
-	text-align: center;
+#profilePicture {
+	width: unset;
+	display: unset;
 }
-
 #profilePicture::before {
 	content: attr(placeholder);
 	top: 0;

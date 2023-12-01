@@ -8,20 +8,22 @@ html {
     appearance: none;
     height: 8rem;
     width: 8rem;
+    top: 0;
     left: 0;
     border: none;
     border-radius: 0;
     background-color: unset;
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 15;
 	transition: var(--transition-speed);
 }
 #sidebarButton + svg {
     height: 8rem;
     width: 8rem;
+    top: 0;
     left: 0;
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 10;
     pointer-events: none;
     transform: rotateY(180deg);
 	transition: var(--transition-speed);
@@ -58,6 +60,7 @@ html {
     align-items: center;
     position: fixed;
 	transition: var(--transition-speed);
+    z-index: 5;
 }
 
 #header {
@@ -101,4 +104,224 @@ html {
     display: block;
     background-color: var(--color-shade-light);
     position: absolute;
+}
+
+#main {
+    min-height: 100vh;
+    width: 100%;
+    left: 0;
+    position: relative;
+    transition: var(--transition-speed);
+}
+
+#sidebarButton:checked + svg + #sidebarPanel + #main {
+    width: calc(100% - 40rem);
+    left: 40rem;
+}
+@media screen and (max-width: 70rem) {
+    #sidebarButton:checked + svg + #sidebarPanel + #main {
+        width: 100%;
+        left: 0;
+    }
+}
+
+#main > #profileAndEvaluations {
+    padding: 8rem;
+    gap: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+@media screen and (max-width: 50rem) {
+    #main > #profileAndEvaluations {
+        gap: 4rem;
+    }
+}
+
+#main .studentInfo,
+#main .studentInfo.registrant > #profile {
+    width: 100%;
+    padding: 4rem;
+    gap: 4rem;
+    border: solid 0.4rem var(--color-secondary);
+    border-radius: 2rem;
+    background-color: var(--color-shade-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+#main .studentInfo > img,
+#main .studentInfo.registrant > #profile > img {
+    height: 24rem;
+    width: 24rem;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+}
+#main .studentInfo > .studentIdentification,
+#main .studentInfo.registrant > #profile > .studentIdentification {
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+@media screen and (max-width: 50rem) {
+    #main .studentInfo,
+    #main .studentInfo.registrant > #profile {
+        flex-direction: column;
+    }
+    #main .studentInfo > .studentIdentification,
+    #main .studentInfo.registrant > #profile > .studentIdentification {
+        align-items: center;
+    }
+}
+
+#main .evaluation {
+    width: 100%;
+    border: solid 0.4rem var(--color-secondary);
+    border-radius: 2rem;
+    background-color: var(--color-shade-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+#main .evaluation > .date {
+    width: 100%;
+    padding: 1.5rem 4rem;
+    background-color: var(--color-secondary);
+    color: var(--color-shade-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#main .evaluation > .users {
+    width: 100%;
+    padding: 1.5rem 4rem;
+    background-color: var(--color-secondary);
+    color: var(--color-shade-light);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+@media screen and (max-width: 50rem) {
+    #main .evaluation > .users {
+        gap: 1rem;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+#main .evaluation > .criteria {
+    width: 100%;
+    gap: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+@media screen and (max-width: 50rem) {
+    #main .evaluation > .criteria {
+        flex-direction: column;
+    }
+}
+#main .evaluation > .criteria > div {
+    width: 100%;
+    padding: 4rem;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+#main .evaluation > .criteria > div > .criterion {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#main .evaluation > .additionalStatement {
+    width: 100%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#main > #yourEvaluations {
+    width: 100%;
+    padding: 8rem;
+    padding-top: 4rem;
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+#main > #yourEvaluations > #search {
+    width: 100%;
+}
+#main > #yourEvaluations > #evaluations {
+    width: 100%;
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+#main > #yourEvaluations > #evaluations > #student {
+    width: 100%;
+    padding: 1rem 4rem;
+    border-radius: 2rem;
+    color: var(--color-shade-light);
+    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#main > #yourEvaluations > #evaluations > #student > #studentInfo {
+    gap: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#main > #yourEvaluations > #evaluations > #student > #studentInfo > img {
+    height: 6rem;
+}
+#main > #yourEvaluations > #evaluations > #student > #studentInfo > #studentIdentification {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+@media screen and (max-width: 50rem) {
+    #main > #yourEvaluations {
+        gap: 4rem;
+        flex-direction: column;
+    }
+    #main > #yourEvaluations > #search,
+    #main > #yourEvaluations > #evaluations {
+        width: 100%;
+    }
+    #main > #yourEvaluations > #evaluations > #student {
+        gap: 2rem;
+        flex-direction: column;
+    }
+    #main > #yourEvaluations > #evaluations > #student > #studentInfo {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #main > #yourEvaluations > #evaluations > #student > #studentInfo > #studentIdentification {
+        gap: 1rem;
+        align-items: center;
+    }
 }
