@@ -1,3 +1,40 @@
+<?php
+
+include('./utils/databaseConnection.php');
+$databaseConnection = databaseConnection();
+
+
+
+// Get the request cookies
+$cookies = $_COOKIE;
+// Get the request sender path
+$path = $_SERVER['REQUEST_URI'];
+
+
+// Check if the request sender is logged in
+if (
+    isset($cookies['token']) &&
+    $cookies['token'] != ''
+) {
+    // Get the user from the database
+    $token = $cookies['token'];
+    $query = "SELECT * FROM students WHERE token = '$token'";
+    $result = mysqli_query($databaseConnection, $query);
+    $student = mysqli_fetch_assoc($result);
+
+    // Check if the user exists
+    if (!$student) {
+        // Redirect the user to the student login
+        header('Location: ./login.php');
+    };
+} else {
+    // Redirect the user to the student login
+    header('Location: ./login.php');
+};
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +49,9 @@
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/dashboard.css">
+
+    <script src="./js/dashboard.js" defer></script>
+    <script src="./js/index.js" defer></script>
 </head>
 
 <body>
@@ -21,7 +61,6 @@
         <path d="M37.5 30L27.5 40L37.5 50L40 47.5L32.5 40L40 32.5L37.5 30Z" fill="var(--color-plain)" />
         <path d="M50 30L40 40L50 50L52.5 47.5L45 40L52.5 32.5L50 30Z" fill="var(--color-plain)" />
     </svg>
-
     <div id="sidebarPanel">
         <div id="header">
             <img src="./assets/CDM Logo.png" alt="CDM Logo">
@@ -31,17 +70,20 @@
             </div>
         </div>
         <div id="map">
-            <a href="" class="page active">
+            <a href="#profileAndEvaluations" class="page active">
                 <h5>Profile and Evaluations</h5>
             </a>
-            <a href="" class="page">
+            <a href="#submitAnEvaluation" class="page">
                 <h5>Submit an Evaluation</h5>
             </a>
-            <a href="" class="page">
+            <a href="#yourEvaluations" class="page">
                 <h5>Your Evaluations</h5>
             </a>
         </div>
-        <button type="submit" class="button sub">
+        <button class="button sub" onclick="(() => {
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            window.location.href = '/login.php';
+        })();">
             <p><b>Logout</b></p>
         </button>
     </div>

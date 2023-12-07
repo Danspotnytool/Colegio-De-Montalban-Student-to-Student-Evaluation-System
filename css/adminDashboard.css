@@ -1,5 +1,6 @@
 
-#main > #allStudents {
+#main > #allStudents,
+#main > #registrationQueue {
     width: 100%;
     padding: 8rem;
     gap: 4rem;
@@ -8,7 +9,17 @@
     justify-content: space-between;
     align-items: flex-start;
 }
-#main > #allStudents > #header {
+#main > #allStudents > #header,
+#main > #registrationQueue > #header {
+    width: 100%;
+    gap: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+#main > #allStudents > #header > #tags,
+#main > #registrationQueue > #header > #tags {
     width: 100%;
     gap: 4rem;
     display: flex;
@@ -16,73 +27,12 @@
     justify-content: space-between;
     align-items: center;
 }
-#main > #allStudents > #header > #tags {
-    width: 100%;
-    gap: 4rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-#main > #allStudents > #students {
+#main > #allStudents > #students,
+#main > #registrationQueue > #students {
     width: 100%;
     gap: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-}
-#main .studentInfo.detailed,
-#main .studentInfo.registrant > #profile {
-    align-items: flex-start;
-}
-@media screen and (max-width: 50rem) {
-    #main .studentInfo.detailed,
-    #main .studentInfo.registrant > #profile {
-        align-items: center;
-    }
-}
-
-#main .studentInfo.detailed > .form,
-#main .studentInfo.registrant > #profile > .form {
-    width: 100%;
-	gap: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-#main .studentInfo.detailed > .form > .row,
-#main .studentInfo.registrant > #profile > .form > .row {
-    width: 100%;
-    gap: 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-#main .studentInfo.detailed > .form > .row > .textInput,
-#main .studentInfo.registrant > #profile > .form > .row > .textInput {
-    max-width: 24rem;
-}
-#main .studentInfo.detailed > .form > .row > .dropdown,
-#main .studentInfo.registrant > #profile > .form > .row > .dropdown {
-    max-width: 32rem;
-}
-
-#main .studentInfo.registrant {
-    flex-direction: column;
-}
-#main .studentInfo.registrant > #profile {
-    padding: unset;
-    border: unset;
-    border-radius: unset;
-    background-color: unset;
-}
-#main .studentInfo.registrant > #action {
-    width: 100%;
-    gap: 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
 }

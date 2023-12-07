@@ -1,3 +1,41 @@
+<?php
+
+include('./utils/databaseConnection.php');
+$databaseConnection = databaseConnection();
+
+
+
+// Get the request cookies
+$cookies = $_COOKIE;
+// Get the request sender path
+$path = $_SERVER['REQUEST_URI'];
+
+
+// Check if the request sender is logged in
+if (
+    isset($cookies['token']) &&
+    $cookies['token'] != ''
+) {
+    // Get the user from the database
+    $token = $cookies['token'];
+    $query = "SELECT * FROM admins WHERE token = '$token'";
+    $result = mysqli_query($databaseConnection, $query);
+    $admin = mysqli_fetch_assoc($result);
+
+    // Check if the user exists
+    if (!$admin) {
+        // Redirect the user to the admin login
+        header('Location: ./adminLogin.php');
+    };
+} else {
+    // Redirect the user to the admin login
+    header('Location: ./adminLogin.php');
+};
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +51,9 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/adminDashboard.css">
+
+    <script src="./js/index.js" defer></script>
+    <script src="./js/adminDashboard.js" defer></script>
 </head>
 
 <body>
@@ -32,20 +73,23 @@
             </div>
         </div>
         <div id="map">
-            <a href="" class="page active">
+            <a href="#allEvaluations" class="page active">
                 <h5>All Evaluations</h5>
             </a>
-            <a href="" class="page">
+            <a href="#allStudents" class="page">
                 <h5>All Students</h5>
             </a>
-            <a href="" class="page">
+            <a href="#registrationQueue" class="page">
                 <h5>Registration Queue</h5>
             </a>
-            <a href="" class="page">
+            <a href="#systemLogs" class="page">
                 <h5>System Logs</h5>
             </a>
         </div>
-        <button type="submit" class="button sub">
+        <button class="button sub" onclick="(() => {
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            window.location.href = '/adminLogin.php';
+        })();">
             <p><b>Logout</b></p>
         </button>
     </div>

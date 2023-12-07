@@ -1,3 +1,38 @@
+<?php
+
+include('./utils/databaseConnection.php');
+$databaseConnection = databaseConnection();
+
+
+
+// Get the request cookies
+$cookies = $_COOKIE;
+// Get the request sender path
+$path = $_SERVER['REQUEST_URI'];
+
+
+// Check if the request sender is logged in
+if (
+    isset($cookies['token']) &&
+    $cookies['token'] != ''
+) {
+    // Get the user from the database
+    $token = $cookies['token'];
+    $query = "SELECT * FROM admins WHERE token = '$token'";
+    $result = mysqli_query($databaseConnection, $query);
+    $admin = mysqli_fetch_assoc($result);
+
+    // Check if the user exists
+    if ($admin) {
+        // Redirect the user to the admin dashboard
+        header('Location: ./adminDashboard.php');
+    };
+};
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +47,9 @@
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/login.css">
+
+    <script src="./js/index.js" defer></script>
+    <script src="./js/adminLogin.js" defer></script>
 </head>
 
 <body>
@@ -25,9 +63,7 @@
                 </div>
             </div>
 
-
-
-            <form action="/login.php" method="POST" id="loginForm">
+            <form id="loginForm">
                 <div class="textInput">
                     <label for="adminID">
                         <h6>Admin ID</h6>
@@ -42,7 +78,7 @@
                     <input required type="password" name="adminKey" id="adminKey" placeholder="#############">
                 </div>
 
-                <button type="submit" class="button">
+                <button type="submit" class="button" id="login">
                     <p><b>Login</b></p>
                 </button>
             </form>

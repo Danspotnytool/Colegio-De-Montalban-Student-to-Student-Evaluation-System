@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/register.css">
+
+    <script src="./js/index.js" defer></script>
+    <script src="./js/register.js" defer></script>
 </head>
 
 <body>
@@ -27,7 +30,7 @@
 
 
 
-            <form action="/register.php" method="POST" id="registerForm">
+            <form id="registerForm">
                 <span id="fullName">
                     <div class="textInput">
                         <label for="firstName">
@@ -71,6 +74,7 @@
                         <select required name="gender" id="gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
+                            <option value="">Prefer not to say</option>
                         </select>
                         <svg width="20" height="15" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 15.5L0 5.5V0.5L10 10.5L20 0.5V5.5L10 15.5Z" fill="var(--color-secondary)" />
@@ -81,21 +85,17 @@
                         <label for="birthday">
                             <h6>Birthday</h6>
                         </label>
-                        <input required type="date" name="birthday" id="birthday" placeholder="mm/dd/yy">
+                        <input required type="date" name="birthday" id="birthday" placeholder="01/01/2020">
                     </div>
 
                     <div class="textInput">
                         <label for="profilePicture">
                             <h6>Profile Picture</h6>
                         </label>
-                        <input required type="file" name="profilePicture" id="profilePicture" placeholder="Upload">
+                        <input required type="file" name="profilePicture" accept="image/png, image/gif, image/jpeg" id="profilePicture" placeholder="Upload">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M9.33438 0.660937C9.05495 1.02344 8.05495 2.31875 7.11303 3.53906L5.40031 5.75781L7.12402 5.76563C8.83517 5.77344 8.84615 5.77344 8.84301 5.80469C8.83988 5.82188 8.83203 5.88125 8.82261 5.9375C8.81162 6.00625 8.80691 7.21094 8.81005 9.71875C8.81633 13.7359 8.80848 13.4203 8.9011 13.6406C9.16327 14.2594 9.91366 14.5094 10.5133 14.1797C10.5808 14.1422 10.6703 14.0703 10.7567 13.9844C10.8697 13.8719 10.9042 13.8234 10.9639 13.7016C11.0942 13.4344 11.0848 13.7781 11.0785 9.60156C11.0754 7.55625 11.0675 5.85625 11.0597 5.825L11.0487 5.76563L14.2889 5.75781L13.3485 4.53906C12.8305 3.86875 11.8305 2.57344 11.1256 1.66094L9.84458 0L9.33438 0.660937Z"
-                                fill="var(--color-secondary)" />
-                            <path
-                                d="M0 20H20V8.34375H13.5479V10.4063H17.5196V17.9375H2.48038V10.4063H6.76609L6.76295 9.37813L6.75824 8.35156L0 8.34375V20Z"
-                                fill="var(--color-secondary)" />
+                            <path d="M9.33438 0.660937C9.05495 1.02344 8.05495 2.31875 7.11303 3.53906L5.40031 5.75781L7.12402 5.76563C8.83517 5.77344 8.84615 5.77344 8.84301 5.80469C8.83988 5.82188 8.83203 5.88125 8.82261 5.9375C8.81162 6.00625 8.80691 7.21094 8.81005 9.71875C8.81633 13.7359 8.80848 13.4203 8.9011 13.6406C9.16327 14.2594 9.91366 14.5094 10.5133 14.1797C10.5808 14.1422 10.6703 14.0703 10.7567 13.9844C10.8697 13.8719 10.9042 13.8234 10.9639 13.7016C11.0942 13.4344 11.0848 13.7781 11.0785 9.60156C11.0754 7.55625 11.0675 5.85625 11.0597 5.825L11.0487 5.76563L14.2889 5.75781L13.3485 4.53906C12.8305 3.86875 11.8305 2.57344 11.1256 1.66094L9.84458 0L9.33438 0.660937Z" fill="var(--color-secondary)" />
+                            <path d="M0 20H20V8.34375H13.5479V10.4063H17.5196V17.9375H2.48038V10.4063H6.76609L6.76295 9.37813L6.75824 8.35156L0 8.34375V20Z" fill="var(--color-secondary)" />
                         </svg>
                     </div>
                 </span>
@@ -107,16 +107,24 @@
                         <label for="course">
                             <h6>Course</h6>
                         </label>
-                
+
                         <select required name="course" id="course">
-                            <option value="BSIT">BSIT</option>
-                            <option value="BSCpE">BSCpE</option>
+                            <option value="BSIT">Bachelor of Science in Information Technoloty</option>
+                            <option value="BSCpE">Bachelor of Science in Computer Engineering</option>
+
+                            <option value="BSEd-SCI">Bachelor of Secondary Education major in Science</option>
+                            <option value="BEEd-GEN">Bachelor of Elementary Education - Generalist</option>
+                            <option value="BEEd-ECED">Bachelor of Early Childhood Education</option>
+                            <option value="BTLEd-ICT">Bachelor of Technology and Livelihood Education major in Information and Communication Technology</option>
+
+                            <option value="BSBA-HRM">Bachelor of Science in Business Administration Major in Human Resource Management</option>
+                            <option value="BSE">Bachelor of Science in Entrepreneurship</option>
                         </select>
                         <svg width="20" height="15" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 15.5L0 5.5V0.5L10 10.5L20 0.5V5.5L10 15.5Z" fill="var(--color-secondary)" />
                         </svg>
                     </div>
-                
+
                     <div class="textInput">
                         <label for="yearAndSection">
                             <h6>Year and Section</h6>
@@ -124,9 +132,9 @@
                         <input required type="text" name="yearAndSection" id="yearAndSection" placeholder="1A">
                     </div>
                 </span>
-                
-                
-                
+
+
+
                 <div class="textInput">
                     <label for="emailAddress">
                         <h6>Email</h6>
@@ -145,11 +153,10 @@
                     <label for="confirmPassword">
                         <h6>Confirm</h6>
                     </label>
-                    <input required type="confirmPassword" name="confirmPassword" id="confirmPassword"
-                        placeholder="#############">
+                    <input required type="password" name="confirmPassword" id="confirmPassword" placeholder="#############">
                 </div>
 
-                <button type="submit" class="button">
+                <button type="submit" class="button" id="register">
                     <p><b>Register</b></p>
                 </button>
             </form>

@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/homepage.css">
+
+    <script src="./js/index.js" defer></script>
 </head>
 
 <body>
@@ -33,9 +35,9 @@
         </div>
     </nav>
     <div id="navbarBackground"></div>
-    
-    
-    
+
+
+
     <div id="banner">
         <div id="content">
             <div class="title">
@@ -60,14 +62,14 @@
         <div id="students">
             <img src="./assets/Students.png" alt="Students">
         </div>
-    
+
         <svg viewBox="0 0 1440 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1350 1350L1440 0V1440H0L1350 1350Z" fill="#04863C" />
         </svg>
     </div>
-    
-    
-    
+
+
+
     <div id="contents">
         <div id="contentHead">
             <h2>Introduction</h2>
@@ -77,7 +79,7 @@
                 supportive learning community.
             </p>
         </div>
-    
+
         <div class="contentRow left">
             <div class="content">
                 <h2>Peer-to-Peer Evaluation</h2>
@@ -91,7 +93,7 @@
                 <img src="./assets/Peer-to-Peer Evaluation.png" alt="Peer-to-Peer Evaluation">
             </div>
         </div>
-    
+
         <div class="contentRow right">
             <div class="content">
                 <h2>User-Friendly Interface</h2>
@@ -102,12 +104,12 @@
                     engagement.
                 </p>
             </div>
-    
+
             <div class="graphic">
                 <img src="./assets/User-Friendly Interface.png" alt="User-Friendly Interface">
             </div>
         </div>
-    
+
         <div class="contentRow left">
             <div class="content">
                 <h2>Confidentiality and Privacy</h2>
@@ -153,9 +155,9 @@
                 <h5>Project Manager and System Developer</h5>
             </div>
         </div>
-    
+
         <div id="otherDevelopers">
-    
+
             <div class="developer">
                 <img src="./assets/Student Picture.png" alt="Student Picture">
                 <div class="info">
@@ -163,7 +165,7 @@
                     <h5>System Analyst and Design</h5>
                 </div>
             </div>
-    
+
             <div class="developer">
                 <img src="./assets/Student Picture.png" alt="Student Picture">
                 <div class="info">
@@ -185,18 +187,18 @@
                     <h5>System Analyst</h5>
                 </div>
             </div>
-            </div>
-            </div>
-            <div id="getStarted">
-                <h2>What are you waiting for?</h2>
-                <a href="register.php" class="button">
-                    <p><b>Get Started Now!</b></p>
-                </a>
-            </div>
-            
-            <div id="copyright">
-                <h5>© 2023 Group 1: Eval. All Rights Reserved.</h5>
-            </div>
+        </div>
+    </div>
+    <div id="getStarted">
+        <h2>What are you waiting for?</h2>
+        <a href="register.php" class="button">
+            <p><b>Get Started Now!</b></p>
+        </a>
+    </div>
+
+    <div id="copyright">
+        <h5>© 2023 Group 1: Eval. All Rights Reserved.</h5>
+    </div>
 </body>
 
 </html>

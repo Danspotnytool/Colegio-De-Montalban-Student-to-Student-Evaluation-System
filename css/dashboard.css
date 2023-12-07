@@ -139,8 +139,7 @@ html {
     }
 }
 
-#main .studentInfo,
-#main .studentInfo.registrant > #profile {
+#main .studentInfo {
     width: 100%;
     padding: 4rem;
     gap: 4rem;
@@ -148,35 +147,61 @@ html {
     border-radius: 2rem;
     background-color: var(--color-shade-light);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
-#main .studentInfo > img,
-#main .studentInfo.registrant > #profile > img {
+@media screen and (max-width: 50rem) {
+    #main .studentInfo {
+        padding: 4rem;
+        gap: 4rem;
+    };
+}
+
+#main .studentInfo > #profile {
+    width: 100%;
+    gap: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+@media screen and (max-width: 50rem) {
+    #main .studentInfo > #profile {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    };
+}
+#main .studentInfo > #profile > img {
     height: 24rem;
     width: 24rem;
     border-radius: 50%;
-    background-color: var(--color-secondary);
+    object-fit: cover;
 }
-#main .studentInfo > .studentIdentification,
-#main .studentInfo.registrant > #profile > .studentIdentification {
+#main .studentInfo > #profile > #form {
     width: 100%;
     gap: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
 }
-@media screen and (max-width: 50rem) {
-    #main .studentInfo,
-    #main .studentInfo.registrant > #profile {
-        flex-direction: column;
-    }
-    #main .studentInfo > .studentIdentification,
-    #main .studentInfo.registrant > #profile > .studentIdentification {
-        align-items: center;
-    }
+#main .studentInfo > #profile > #form > .row {
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#main .studentInfo > #action {
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #main .evaluation {

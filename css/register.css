@@ -76,7 +76,7 @@ body::after {
 	gap: 2rem;
 	display: inline-flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: stretch;
 }
 #registerForm > span .textInput {
