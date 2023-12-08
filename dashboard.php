@@ -11,6 +11,30 @@ $cookies = $_COOKIE;
 $path = $_SERVER['REQUEST_URI'];
 
 
+
+// System logs
+$time = time();
+$HTTP_X_FORWARDED_FOR = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+$HTTP_CLIENT_IP = $_SERVER['REMOTE_ADDR'] ?? '';
+$USER_AGENT = $_SERVER['HTTP_USER_AGENT'] ?? '';
+$content = <<<EOT
+    {
+        "time": $time,
+        "type": "visit",
+        "payload": {
+            "path": "$path",
+            "ip": {
+                "HTTP_X_FORWARDED_FOR": "$HTTP_X_FORWARDED_FOR",
+                "HTTP_CLIENT_IP": "$HTTP_CLIENT_IP"
+            },
+            "userAgent": "$USER_AGENT"
+        }
+    }
+EOT;
+
+$content = json_decode($content, true);
+
+
 // Check if the request sender is logged in
 if (
     isset($cookies['token']) &&
@@ -25,12 +49,28 @@ if (
     // Check if the user exists
     if (!$student) {
         // Redirect the user to the student login
-        header('Location: ./login.php');
+        header('Location: /login.php');
+        $content['type'] = 'redirect';
+        $content['payload']['redirect'] = '/login.php';
     };
 } else {
     // Redirect the user to the student login
-    header('Location: ./login.php');
+    header('Location: /login.php');
+    $content['type'] = 'redirect';
+    $content['payload']['redirect'] = '/login.php';
 };
+
+$content = json_encode($content);
+
+$id = $time . '-' . uniqid();
+
+// Insert the system logs to the database
+$query = "INSERT INTO system_logs (id, timeAdded, content) VALUES ('$id', '$time', '$content')";
+mysqli_query($databaseConnection, $query);
+
+
+
+$url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
 
 ?>
 
@@ -43,15 +83,15 @@ if (
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colegio de Montalban Student to Student Evaluation System</title>
 
-    <link rel="shortcut icon" href="./assets/Favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo $url; ?>assets/Favicon.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="./fonts/font-face.css">
+    <link rel="stylesheet" href="<?php echo $url; ?>fonts/font-face.css">
 
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo $url; ?>css/index.css">
+    <link rel="stylesheet" href="<?php echo $url; ?>css/dashboard.css">
 
-    <script src="./js/dashboard.js" defer></script>
-    <script src="./js/index.js" defer></script>
+    <script src="<?php echo $url; ?>js/dashboard.js" defer></script>
+    <script src="<?php echo $url; ?>js/index.js" defer></script>
 </head>
 
 <body>
@@ -63,7 +103,7 @@ if (
     </svg>
     <div id="sidebarPanel">
         <div id="header">
-            <img src="./assets/CDM Logo.png" alt="CDM Logo">
+            <img src="<?php echo $url; ?>assets/CDM Logo.png" alt="CDM Logo">
             <div>
                 <h3>Student to Student</h3>
                 <h4>Evaluation System</h4>
@@ -93,7 +133,7 @@ if (
     <div id="main">
         <!-- <div id="profileAndEvaluations">
             <div class="studentInfo">
-                <img src="./assets/Student Picture.png" alt="Student Picture">
+                <img src="<?php echo $url; ?>assets/Student Picture.png" alt="Student Picture">
                 <div class="studentIdentification">
                     <h1>John Dougma Backt</h1>
                     <h2>20-00001</h2>
@@ -246,7 +286,7 @@ if (
             <div id="evaluations">
                 <div id="student">
                     <div id="studentInfo">
-                        <img src="./assets/Student Picture.png" alt="Student Picture">
+                        <img src="<?php echo $url; ?>assets/Student Picture.png" alt="Student Picture">
                         <div id="studentIdentification">
                             <h4>John Dougma Backt</h4>
                             <h5>20-00001</h5>
