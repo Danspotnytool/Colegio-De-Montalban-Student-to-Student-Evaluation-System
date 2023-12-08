@@ -56,15 +56,17 @@ if (mysqli_num_rows($resultStudents) == 0) {
                 "code": 401
             }
         EOT;
+        exit();
     } else {
         // The student is not found in the students table but is found in the registrants table
         echo <<<EOT
-            {
-                "message": "Student not yet verified. Please wait for the admin to verify your account",
-                "status": "unauthorized",
-                "code": 401
-            }
+        {
+            "message": "Student not yet verified. Please wait for the admin to verify your account",
+            "status": "unauthorized",
+            "code": 401
+        }
         EOT;
+        exit();
     };
 } else {
     // The student is found in the students table
