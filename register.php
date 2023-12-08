@@ -1,3 +1,40 @@
+<?php
+
+include('./utils/databaseConnection.php');
+$databaseConnection = databaseConnection();
+
+
+
+// Get the request cookies
+$cookies = $_COOKIE;
+// Get the request sender path
+$path = $_SERVER['REQUEST_URI'];
+
+
+// Check if the request sender is logged in
+if (
+    isset($cookies['token']) &&
+    $cookies['token'] != ''
+) {
+    // Get the user from the database
+    $token = $cookies['token'];
+    $query = "SELECT * FROM students WHERE token = '$token'";
+
+    $result = mysqli_query($databaseConnection, $query);
+
+    // Check if the user exists
+    if (
+        mysqli_num_rows($result) > 0
+    ) {
+        // Redirect the user to the dashboard
+        header('Location: ./dashboard.php');
+    };
+};
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
