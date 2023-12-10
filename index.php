@@ -191,7 +191,7 @@
     </div>
     <div id="getStarted">
         <h2>What are you waiting for?</h2>
-        <a href="register.php" class="button">
+        <a href="register.php" class="button sub">
             <p><b>Get Started Now!</b></p>
         </a>
     </div>

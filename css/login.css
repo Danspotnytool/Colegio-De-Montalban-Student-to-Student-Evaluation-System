@@ -45,7 +45,7 @@ body::after {
 #loginPanel {
 	padding: 8rem 4rem;
 	gap: 4rem;
-	border: solid 0.4rem var(--color-primary);
+	border: solid 0.2rem var(--color-primary);
 	text-align: center;
 	display: flex;
 	flex-direction: column;
