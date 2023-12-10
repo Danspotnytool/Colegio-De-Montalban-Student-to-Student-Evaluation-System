@@ -26,6 +26,7 @@ $admin = json_decode($body);
 $firstName = $admin->firstName;
 $middleName = $admin->middleName;
 $lastName = $admin->lastName;
+$fullName = "$firstName $lastName";
 $studentNumber = $admin->studentNumber;
 $gender = $admin->gender;
 $birthday = $admin->birthday;
@@ -269,8 +270,8 @@ $profilePicture = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[H
 
 
 // Insert data to database table "registrants"
-$insertQuery = "INSERT INTO registrants (firstName, middleName, lastName, studentNumber, gender, birthday, profilePicture, course, year, section, email, password, token, timeAdded)
-                    VALUES ('$firstName', '$middleName', '$lastName', '$studentNumber', '$gender', '$birthday', '$profilePicture', '$course', '$year', '$section', '$emailAddress', '$hashedPassword', '$token', '$dateTime')";
+$insertQuery = "INSERT INTO registrants (firstName, middleName, lastName, fullName studentNumber, gender, birthday, profilePicture, course, year, section, email, password, token, timeAdded)
+                    VALUES ('$firstName', '$middleName', '$lastName', $fullName, '$studentNumber', '$gender', '$birthday', '$profilePicture', '$course', '$year', '$section', '$emailAddress', '$hashedPassword', '$token', '$dateTime')";
 if (mysqli_query($databaseConnection, $insertQuery)) {
     $retrieveQuery = "SELECT * FROM registrants WHERE studentNumber = '$studentNumber'";
     if ($result = mysqli_query($databaseConnection, $retrieveQuery)) {

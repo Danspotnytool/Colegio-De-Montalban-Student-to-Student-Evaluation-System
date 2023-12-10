@@ -19,17 +19,6 @@ $databaseConnection = databaseConnection();
 
 
 
-// Check if request is GET
-if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-    echo <<<EOT
-        {
-            "message": "Invalid request method",
-            "status": "error",
-            "code": 500
-        }
-    EOT;
-    exit();
-};
 // Get the request cookies
 $cookies = $_COOKIE;
 $token = $cookies['token'];
@@ -37,14 +26,19 @@ $token = $cookies['token'];
 // Get query parameters
 $urlQuery = $_GET;
 $params = array_keys($urlQuery);
-$start = 0;
-if (in_array('start', $params)) {
-    $start = $urlQuery['start'];
+$search = '';
+if (in_array('search', $params)) {
+    $search = $urlQuery['search'];
+};
+
+
+if ($search == '') {
+    header('Location: retrieve.php');
 };
 
 
 // Get the user id from the token
-$query = "SELECT * FROM admins WHERE token = '$token'";
+$query = "SELECT * FROM students WHERE token = '$token'";
 $admin = mysqli_query($databaseConnection, $query);
 
 if (!$admin) {
@@ -58,9 +52,31 @@ if (!$admin) {
     exit();
 };
 
+// If the search is 2 characters, separate the year and section
+$year = $search;
+$section = $search;
+if (strlen($search) == 2) {
+    $year = $search[0];
+    $section = $search[1];
+    $search = '';
+};
+
 // Get the students
 // Add the row number to the query
-$query = "SELECT * FROM students WHERE timeAdded > $start ORDER BY timeAdded ASC Limit 5";
+$query = "SELECT profilePicture, firstName, lastName, studentNumber FROM students WHERE
+(
+    firstName LIKE '$search'
+OR  middleName LIKE '$search'
+OR  lastName LIKE '$search'
+OR  fullName LIKE '$search'
+OR  studentNumber LIKE '$search'
+OR  course LIKE '$search'
+OR  year LIKE '$search'
+OR  year LIKE '$year'
+OR  section LIKE '$search'
+OR  section LIKE '$section'
+OR  email LIKE '$search'
+)";
 $students = mysqli_query($databaseConnection, $query);
 
 if (!$students) {

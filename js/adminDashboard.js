@@ -21,6 +21,8 @@ systemLogs.id = 'systemLogs';
 
 /** @type {import("../utils/types").Student[]} */
 const studentsList = [];
+/** @type {import("../utils/types").Evaluation[]} */
+const evaluationsList = [];
 
 
 
@@ -212,16 +214,175 @@ const displayStudent = (student, buttons) => {
 
 
 
+/**
+ * @type {(evaluation: import("../utils/types").Evaluation, parent: Element) => Void}
+ */
+const displayEvaluation = (evaluation, parent) => {
+    console.log(evaluation);
+    const evaluationElement = document.createElement('div');
+    evaluationElement.classList.add('evaluation');
+    evaluationElement.classList.add('withSender');
+    evaluationElement.innerHTML = `
+    <div class="date">
+        <h5>${(() => {
+            const date = new Date(parseInt(evaluation.timeAdded * 1000));
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+            return `${monthNames[month - 1]} ${day}, ${year}`;
+        })()}</h5>
+    </div>
+    ${(() => {
+            if (evaluation.receiverName) {
+                return `
+                    <div class="users">
+                        <h6><span style="font-family: unset;">From:</span> <span style="font-family: unset;">${evaluation.senderName} (${evaluation.senderStudentNumber})</span></h6>
+                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} (${evaluation.receiverStudentNumber})</span></h6>
+                    </div>
+                `;
+            };
+        })()}
+    <div class="criteria">
+        ${(() => {
+            const categories = [];
+            for (const content of evaluation.contents) {
+                if (!categories.includes(content.category)) {
+                    categories.push(content.category);
+                };
+            };
+
+            let html = '';
+
+            for (const category of categories) {
+                html += `
+                <div>
+                    <h2>${category}</h2>
+                `;
+                for (const content of evaluation.contents) {
+                    if (content.category == category) {
+                        html += `
+                        <div class="criterion">
+                            <h6>${content.name}</h6>
+                            <h6>${content.value}</h6>
+                        </div>
+                        `;
+                    };
+                };
+                html += `
+                </div>
+                `;
+            };
+            return html;
+        })()}
+        </div>
+    </div>
+    <div class="additionalStatement">
+        <p>${evaluation.additionalStatement}</p>
+    </div>`;
+    parent.appendChild(evaluationElement);
+};
+
+
+
 allEvaluationsButton.addEventListener('click', () => {
     pagesButton(false, allEvaluationsButton);
+    main.appendChild(allEvaluations);
+
+    allEvaluations.innerHTML = `
+    <h2 style="width: 100%; text-align: center;">All Evaluations</h2>
+    <div id="header">
+        <div class="textInput" style="color: unset;">
+            <label for="student">
+                <h6>Search</h6>
+            </label>
+            <input type="text" name="student" id="student" placeholder="Student" onKeypress="(() => {
+                if (event.keyCode === 3|| event.code === 'Enter') {
+                    document.getElementById('search').click();
+                };
+            })();">
+        </div>
+        <div>
+            <button class="button" onclick="(() => {
+                event.srcElement.disabled = true;
+            })();" id="search">
+                <p><b>Search</b></p>
+            </button>
+        </div>
+    </div>
+
+    <div id="evaluations"></div>`;
+
+
+    document.getElementById('search').addEventListener('click', () => {
+        fetch(`./api/allEvaluations/search.php?search=${document.getElementById('student').value}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.text())
+            .then(res => {
+                console.log(res);
+                document.getElementById('search').disabled = false;
+                /** @type {import("../utils/types").Response}*/
+                const response = JSON.parse(res);
+
+                if (response.code == 200) {
+                    if (response.payload.length == 0) {
+                        alertUser('404', 'No evaluations found.', 'alert');
+                        return;
+                    };
+                    document.getElementById('evaluations').innerHTML = '';
+                    for (const evaluation of response.payload) {
+                        evaluation.contents = JSON.parse(evaluation.contents);
+                        displayEvaluation(evaluation, document.getElementById('evaluations'));
+                        evaluationsList.push(evaluation);
+                    };
+                }
+            }).catch(error => {
+                console.log(error);
+                alertUser('Error', 'An error occured while fetching the registrants.', 'alert');
+            });
+    });
+
+    evaluationsList.length = 0;
+
+    fetch('/api/allEvaluations/retrieve.php', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.text())
+        .then(res => {
+            console.log(res);
+            /** @type {import("../utils/types").Response}*/
+            const response = JSON.parse(res);
+            if (response.status == 'success') {
+                if (response.payload.length == 0) {
+                    alertUser('404', 'No evaluations more found.', 'alert');
+                    return;
+                };
+                for (const evaluation of response.payload) {
+                    evaluation.contents = JSON.parse(evaluation.contents);
+                    displayEvaluation(evaluation, document.querySelector('#main > #allEvaluations > #evaluations'));
+                    evaluationsList.push(evaluation);
+                };
+            } else {
+                alertUser('Error', response.message, 'alert');
+            };
+        });
 });
 allStudentsButton.addEventListener('click', () => {
     pagesButton(false, allStudentsButton);
     main.appendChild(allStudents);
 
     allStudents.innerHTML = `
+    <h2 style="width: 100%; text-align: center;">All Students</h2>
     <div id="header">
-        <div class="textInput">
+        <div class="textInput" style="color: unset;">
             <label for="student">
                 <h6>Search</h6>
             </label>
@@ -251,6 +412,8 @@ allStudentsButton.addEventListener('click', () => {
             }
         }).then(response => response.text())
             .then(res => {
+                console.log(res);
+                document.getElementById('search').disabled = false;
                 /** @type {import("../utils/types").Response}*/
                 const response = JSON.parse(res);
 
@@ -265,7 +428,7 @@ allStudentsButton.addEventListener('click', () => {
                 }
             }).catch(error => {
                 console.log(error);
-                alertUser('Error', 'An error occured while fetching the registrants.', 'alert');
+                alertUser('Error', 'An error occured while fetching the students.', 'alert');
             });
     });
 
@@ -296,8 +459,9 @@ registrationQueueButton.addEventListener('click', () => {
     main.appendChild(registrationQueue);
 
     registrationQueue.innerHTML = `
+    <h2 style="width: 100%; text-align: center;">Rgistration Queue</h2>
     <div id="header">
-        <div class="textInput">
+        <div class="textInput" style="color: unset;">
             <label for="student">
                 <h6>Search</h6>
             </label>
@@ -485,7 +649,7 @@ registrationQueueButton.addEventListener('click', () => {
                     },
                     {
                         id: 'askForMoreInformation',
-                        label: 'Ask for more information',
+                        label: 'Ask for more Information',
                         callback: (student, buttonElement) => {
                             fetch('./api/registrationQueue/ask.php', {
                                 method: 'POST',
@@ -509,6 +673,13 @@ registrationQueueButton.addEventListener('click', () => {
                                     console.log(error);
                                     alertUser('Error', 'An error occured while asking for more information.', 'alert');
                                 });
+                        }
+                    },
+                    {
+                        id: 'editInformation',
+                        label: 'Edit Information',
+                        callback: (student, buttonElement) => {
+
                         }
                     },
                     {
@@ -560,12 +731,39 @@ pagesButton(true);
 
 
 
-window.addEventListener('scroll', (e) => {
+window.addEventListener('scroll', async (e) => {
     // Check if the page is scrolled to the bottom
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         // Check which page is active
         switch (window.location.hash.substring(1)) {
             case 'allEvaluations':
+                fetch(`./api/allEvaluations/retrieve.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.text())
+                    .then(res => {
+                        console.log(res);
+                        /** @type {import("../utils/types").Response}*/
+                        const response = JSON.parse(res);
+                        if (response.status == 'success') {
+                            if (response.payload.length == 0) {
+                                alertUser('404', 'No evaluations more found.', 'alert');
+                                return;
+                            };
+                            for (const evaluation of response.payload) {
+                                evaluation.contents = JSON.parse(evaluation.contents);
+                                displayEvaluation(evaluation, document.querySelector('#main > #allEvaluations > #evaluations'));
+                                evaluationsList.push(evaluation);
+                            };
+                        } else {
+                            alertUser('Error', response.message, 'alert');
+                        };
+                    }).catch(err => {
+                        console.log(err);
+                        alertUser('Error', 'Failed to load more evaluations.', 'alert');
+                    });
                 break;
             case 'allStudents':
                 break;
@@ -615,7 +813,7 @@ window.addEventListener('scroll', (e) => {
                                 },
                                 {
                                     id: 'askForMoreInformation',
-                                    label: 'Ask for more information',
+                                    label: 'Ask for more Information',
                                     callback: (student, buttonElement) => {
                                         fetch('./api/registrationQueue/ask.php', {
                                             method: 'POST',
@@ -639,6 +837,13 @@ window.addEventListener('scroll', (e) => {
                                                 console.log(error);
                                                 alertUser('Error', 'An error occured while asking for more information.', 'alert');
                                             });
+                                    }
+                                },
+                                {
+                                    id: 'editInformation',
+                                    label: 'Edit Information',
+                                    callback: (student, buttonElement) => {
+
                                     }
                                 },
                                 {

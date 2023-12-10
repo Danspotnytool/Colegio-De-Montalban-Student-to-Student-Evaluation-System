@@ -62,9 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             "year": "$year",
             "section": "$section",
             "email": "$email",
-            "password": "$password",
-            "timeAdded": "$timeAdded",
-            "token": "$token"
+            "timeAdded": "$timeAdded"
         }
     }
     EOT;

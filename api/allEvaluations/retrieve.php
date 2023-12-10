@@ -58,15 +58,15 @@ if (!$admin) {
     exit();
 };
 
-// Get the registrants
+// Get the evaluations
 // Add the row number to the query
-$query = "SELECT * FROM system_logs WHERE timeAdded > $start ORDER BY timeAdded ASC Limit 50";
-$registrants = mysqli_query($databaseConnection, $query);
+$query = "SELECT * FROM evaluations WHERE timeAdded > $start ORDER BY timeAdded ASC Limit 5";
+$result = mysqli_query($databaseConnection, $query);
 
-if (!$registrants) {
+if (!$result) {
     echo <<<EOT
         {
-            "message": "Error fetching registrants",
+            "message": "Error getting evaluations",
             "status": "error",
             "code": 500
         }
@@ -74,17 +74,36 @@ if (!$registrants) {
     exit();
 };
 
-$registrantsArray = array();
-while ($registrant = mysqli_fetch_assoc($registrants)) {
-    array_push($registrantsArray, $registrant);
+$evaluations = array();
+while ($evaluation = mysqli_fetch_assoc($result)) {
+    array_push($evaluations, $evaluation);
 };
-$registrantsArray = json_encode($registrantsArray);
 
-echo <<<EOT
-    {
-        "message": "Registrants fetched successfully",
-        "status": "success",
-        "code": 200,
-        "payload": $registrantsArray
-    }
+// Get the name of the sender and the receiver
+foreach ($evaluations as &$evaluation) {
+    $senderStudentNumber = $evaluation['senderStudentNumber'];
+    $receiverStudentNumber = $evaluation['receiverStudentNumber'];
+
+    $query = "SELECT fullName FROM students WHERE studentNumber = '$senderStudentNumber'";
+    $result = mysqli_query($databaseConnection, $query);
+    $sender = mysqli_fetch_assoc($result);
+
+    $query = "SELECT fullName FROM students WHERE studentNumber = '$receiverStudentNumber'";
+    $result = mysqli_query($databaseConnection, $query);
+    $receiver = mysqli_fetch_assoc($result);
+
+    $evaluation['senderName'] = $sender['fullName'];
+    $evaluation['receiverName'] = $receiver['fullName'];
+};
+
+$evaluations = json_encode($evaluations);
+
+// Send the evaluations to the client
+echo  <<<EOT
+{
+    "message": "Evaluations fetched successfully",
+    "status": "success",
+    "code": 200,
+    "payload": $evaluations
+}
 EOT;

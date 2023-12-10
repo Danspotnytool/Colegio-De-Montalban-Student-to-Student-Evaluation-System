@@ -33,7 +33,7 @@ if (in_array('search', $params)) {
 
 
 if ($search == '') {
-    header('Location: getstudents.php');
+    header('Location: retrieve.php');
 };
 
 

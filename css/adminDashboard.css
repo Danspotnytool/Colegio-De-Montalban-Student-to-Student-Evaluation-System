@@ -1,7 +1,15 @@
 
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+#main > #allEvaluations,
 #main > #allStudents,
 #main > #registrationQueue {
     width: 100%;
+    max-width: 120rem;
     padding: 8rem;
     gap: 4rem;
     display: flex;
@@ -9,15 +17,24 @@
     justify-content: space-between;
     align-items: flex-start;
 }
+@media only screen and (max-width: 50rem) {
+    #main > #allEvaluations,
+    #main > #allStudents,
+    #main > #registrationQueue {
+        padding: 8rem 4rem;
+    }
+}
+#main > #allEvaluations > #header,
 #main > #allStudents > #header,
 #main > #registrationQueue > #header {
     width: 100%;
-    gap: 4rem;
+    gap: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
 }
+#main > #allEvaluations > #header > #tags,
 #main > #allStudents > #header > #tags,
 #main > #registrationQueue > #header > #tags {
     width: 100%;
@@ -27,8 +44,17 @@
     justify-content: space-between;
     align-items: center;
 }
+#main > #allEvaluations > #students,
 #main > #allStudents > #students,
 #main > #registrationQueue > #students {
+    width: 100%;
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+#main > #allEvaluations #evaluations {
     width: 100%;
     gap: 4rem;
     display: flex;

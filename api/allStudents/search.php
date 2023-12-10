@@ -67,6 +67,7 @@ $query = "SELECT * FROM students WHERE
 (firstName LIKE '$search'
 OR middleName LIKE '$search'
 OR lastName LIKE '$search'
+OR fullName LIKE '$search'
 OR studentNumber LIKE '$search'
 OR course LIKE '$search'
 OR year LIKE '$search'

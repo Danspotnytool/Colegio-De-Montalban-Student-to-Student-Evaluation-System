@@ -18,6 +18,8 @@ yourEvaluations.id = 'yourEvaluations';
 
 /** @type {import("../utils/types").Student[]} */
 const studentsList = [];
+/** @type {import("../utils/types").Evaluation[]} */
+const evaluationsList = [];
 
 
 
@@ -197,14 +199,90 @@ const displayStudent = (student, buttons) => {
 
 
 
+/**
+ * @type {(evaluation: import("../utils/types").Evaluation, parent: Element) => Void}
+ */
+const displayEvaluation = (evaluation, parent) => {
+    console.log(evaluation);
+    const evaluationElement = document.createElement('div');
+    evaluationElement.classList.add('evaluation');
+    evaluationElement.innerHTML = `
+    <div class="date">
+        <h5>${(() => {
+            const date = new Date(parseInt(evaluation.timeAdded * 1000));
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'
+            ];
+            return `${monthNames[month - 1]} ${day}, ${year}`;
+        })()}</h5>
+    </div>
+    ${(() => {
+            if (evaluation.receiverStudentNumber) {
+                return `
+                    <div class="users">
+                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} (${evaluation.receiverStudentNumber})</span></h6>
+                    </div>
+                `;
+            } else {
+                return '';
+            };
+        })()}
+    <div class="criteria">
+        ${(() => {
+            const categories = [];
+            for (const content of evaluation.contents) {
+                if (!categories.includes(content.category)) {
+                    categories.push(content.category);
+                };
+            };
+
+            let html = '';
+
+            for (const category of categories) {
+                html += `
+                <div>
+                    <h2>${category}</h2>
+                `;
+                for (const content of evaluation.contents) {
+                    if (content.category == category) {
+                        html += `
+                        <div class="criterion">
+                            <h6>${content.name}</h6>
+                            <h6>${content.value}</h6>
+                        </div>
+                        `;
+                    };
+                };
+                html += `
+                </div>
+                `;
+            };
+            return html;
+        })()}
+        </div>
+    </div>
+    <div class="additionalStatement">
+        <p>${evaluation.additionalStatement}</p>
+    </div>`;
+    parent.appendChild(evaluationElement);
+};
+
+
+
 profileAndEvaluationsButton.addEventListener('click', () => {
     pagesButton(false, profileAndEvaluationsButton);
     main.appendChild(profileAndEvaluations);
 
     main.innerHTML = `
         <div id="profileAndEvaluations">
+            <h2>Profile and Evaluations</h2>
             <div id="profile"></div>
-            <div id="evaluations"></div>
+            <div id="evaluations">
+            </div>
         </div>
     `;
 
@@ -219,16 +297,474 @@ profileAndEvaluationsButton.addEventListener('click', () => {
             console.log(res);
             /** @type {import("../utils/types").Response}*/
             const response = JSON.parse(res);
-            displayStudent(response.payload, []);
+            displayStudent(response.payload, [
+                {
+                    name: 'edit',
+                    label: 'Edit Profile',
+                    callback: (student, buttonElement) => { }
+                },
+                {
+                    name: 'changePassword',
+                    label: 'Change Password',
+                    callback: (student, buttonElement) => { }
+                },
+                {
+                    name: 'generateStatisticalReport',
+                    label: 'Generate Statistical Report',
+                    callback: (student, buttonElement) => { }
+                }
+            ]);
         });
+
+
+    fetch('/api/profileAndEvaluations/evaluations.php', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.text())
+        .then(res => {
+            console.log(res);
+            /** @type {import("../utils/types").Response}*/
+            const response = JSON.parse(res);
+            for (const evaluation of response.payload) {
+                evaluation.contents = JSON.parse(evaluation.contents);
+                evaluation.receiverStudentNumber = null;
+                displayEvaluation(evaluation, document.querySelector('#main > #profileAndEvaluations > #evaluations'));
+                evaluationsList.push(evaluation);
+            };
+        });
+
 });
 submitAnEvaluationButton.addEventListener('click', () => {
     pagesButton(false, submitAnEvaluationButton);
     main.appendChild(submitAnEvaluation);
+    main.innerHTML = `
+        <div id="submitAnEvaluation">
+            <h2>Submit an Evaluation</h2>
+            <div id="students">
+                <div id="search">
+                    <div class="textInput">
+                        <label for="searchStudent">
+                            <h6>Search Student</h6>
+                        </label>
+                        <input required type="search" name="searchStudent" id="searchStudent" placeholder="Student">
+                    </div>
+
+                    <span>
+                        <button class="button">
+                            <p><b>Search</b></p>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <form id="form">
+                <div id="student">
+                    <img src="" alt="Profile Picture">
+                    <div id="studentIdentification">
+                        <h5 id="fullName"></h5>
+                        <h5 id="studentNumber"></h5>
+                    </div>
+                    <div>
+                        <button type="button" class="button sub" onClick="(() => {
+                            submitAnEvaluationButton.click();
+                        })()">
+                            <p><b>Cancel</b></p>
+                        </button>
+                    </div>
+                </div>
+                <div id="instructions">
+                    <h3>Instructions</h3>
+                    <p>Rate the student based on the following criteria by clicking on the radio buttons;<br> where 1 is the lowest and 5 is the highest.<br><br> Just click on the radio button to select your rating.</p>
+                </div>
+            </form>
+        </div>
+    `;
+
+
+
+    const searchStudent = document.querySelector('#main > #submitAnEvaluation > #students > #search > .textInput > #searchStudent');
+    const searchButton = document.querySelector('#main > #submitAnEvaluation > #students > #search > span > .button');
+    const students = document.querySelector('#main > #submitAnEvaluation > #students');
+
+    searchButton.addEventListener('click', () => {
+        const input = searchStudent.value;
+        if (input == '') {
+            return;
+        };
+        searchButton.disabled = true;
+        // Remove the previous students
+        for (const student of students.querySelectorAll('.student')) {
+            student.remove();
+        };
+
+        fetch(`/api/submitAnEvaluation/searchStudents.php?search=${input}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.text())
+            .then(res => {
+                console.log(res);
+                /** @type {import("../utils/types").Response}*/
+                const response = JSON.parse(res);
+                searchButton.disabled = false;
+
+                if (response.status == 'success') {
+                    if (response.payload.length == 0) {
+                        alertUser('404', 'No student found.', 'alert');
+                        return;
+                    };
+                    for (const student of response.payload) {
+                        const studentElement = document.createElement('div');
+                        studentElement.classList.add('student');
+                        studentElement.id = `student_${student.studentNumber.replace(/\-/g, '_')}`;
+                        studentElement.innerHTML = `
+                            <img src="${student.profilePicture}" alt="Profile Picture">
+                            <div id="studentIdentification">
+                                <h5>${student.firstName} ${student.lastName}</h5>
+                                <h5>${student.studentNumber}</h5>
+                            </div>
+                        `;
+                        students.appendChild(studentElement);
+                        document.querySelector(`#main > #submitAnEvaluation > #students > #student_${student.studentNumber.replace(/\-/g, '_')}`).addEventListener('click', () => {
+                            document.querySelector('#main > #submitAnEvaluation > #students').style.display = 'none';
+                            document.querySelector('#main > #submitAnEvaluation > #form').style.display = 'flex';
+                            document.querySelector('#main > #submitAnEvaluation > #form > #student > img').src = student.profilePicture;
+                            document.querySelector('#main > #submitAnEvaluation > #form > #student > #studentIdentification > #fullName').innerText = `${student.firstName} ${student.lastName}`;
+                            document.querySelector('#main > #submitAnEvaluation > #form > #student > #studentIdentification > #studentNumber').innerText = student.studentNumber;
+                        });
+                    };
+                } else {
+                    alertUser('Error', response.message, 'alert');
+                };
+            });
+    });
+    searchStudent.addEventListener('keyup', (e) => {
+        if (e.key == 'Enter') {
+            searchButton.click();
+        };
+    });
+
+
+    /**
+     * @typedef {{
+     *      name: String,
+     *      descriptions: String[]
+     * }} Criterion
+     */
+
+    /** @type {Criterion[]} */
+    const ClassBehavior = [
+        {
+            name: 'Participation',
+            descriptions: [
+                'Minimal',
+                'Occasional',
+                'Regular',
+                'Active',
+                'Proactive',
+            ]
+        },
+        {
+            name: 'Punctuality',
+            descriptions: [
+                'Occasionally late',
+                'Mostly on time',
+                'Consistently on time',
+                'Always early',
+                'Consistently late'
+            ]
+        },
+        {
+            name: 'Respect',
+            descriptions: [
+                'Occasionally Disrespectful',
+                'Generally Respectful',
+                'Very Respectful',
+                'Exemplary Respect',
+                'Disrespectful'
+            ]
+        },
+        {
+            name: 'Cooperation',
+            descriptions: [
+                'Rarely Cooperative',
+                'Usually Cooperative',
+                'Very Cooperative',
+                'Exceptionally Cooperative',
+                'Uncooperative'
+            ]
+        },
+        {
+            name: 'Attentiveness',
+            descriptions: [
+                'Occasionally Distracted',
+                'Generally Attentivene',
+                'Very Attentive',
+                'Exceptionally Attentive',
+                'Distracted'
+            ]
+        }
+    ];
+
+    /** @type {Criterion[]} */
+    const ClassStanding = [
+        {
+            name: 'Academic Performance',
+            descriptions: [
+                'Minimal collaboration, hindering teamwork.',
+                'Needs improvement in communication and contribution.',
+                'Satisfactory collaboration, room for enhancement.',
+                'Actively engages, communicates well, positive contribution.',
+                'Excels in collaboration, strong teamwork, leadership.'
+            ]
+        }, {
+            name: 'Adaptability ',
+            descriptions: [
+                'Struggles to adapt to new situations, lacks flexibility.',
+                'Limited adaptability, some difficulty adjusting.',
+                'Adequate adaptability, with room for improvement.',
+                'Demonstrates flexibility and adjusts well.',
+                'Exceptional adaptability, thrives in diverse situations.'
+            ]
+        }, {
+            name: 'Attendance and Punctuality',
+            descriptions: [
+                'Minimal sense of responsibility, often neglects tasks.',
+                'Limited responsibility, inconsistent in task completion.',
+                'Satisfactory sense of responsibility, room for improvement.',
+                'Demonstrates responsibility, completes tasks reliably.',
+                'Exceptional sense of responsibility, consistently reliable.'
+            ]
+        }, {
+            name: 'Social Interaction',
+            descriptions: [
+                'Struggles with social interactions, limited engagement.',
+                'Limited social interaction skills, occasional difficulty.',
+                'Satisfactory social interaction, with room for improvement.',
+                'Good social skills, interacts well with peers.',
+                'Exceptional social interaction skills, fosters positive relationships.'
+            ]
+        }, {
+            name: 'Motivation',
+            descriptions: [
+                'Lacks motivation, shows little interest in tasks.',
+                'Limited motivation, inconsistent engagement.',
+                'Satisfactory motivation, room for increased engagement.',
+                'Demonstrates good motivation, actively engages.',
+                'Exceptional motivation, consistently enthusiastic and committed'
+            ]
+        }
+    ];
+
+    {
+        const criteria = document.createElement('div');
+        criteria.classList.add('criteria');
+        criteria.innerHTML = `
+            <h2>Class Behavior</h2>
+            <div></div>
+        `;
+        document.querySelector('#main > #submitAnEvaluation > #form').appendChild(criteria);
+        const criteriaContainer = criteria.querySelector('div');
+        let i = 0;
+        for (const criterion of ClassBehavior) {
+            const criterionElement = document.createElement('div');
+            criterionElement.id = criterion.name.replace(/ /g, '');
+            criterionElement.classList.add('criterion');
+            if (i % 2 == 0) {
+                criterionElement.classList.add('even');
+            };
+            criterionElement.innerHTML = `
+                <h4>${criterion.name}</h4>
+                <div id="rating">
+                </div>
+                <p id="description"></p>
+            `;
+            for (let i = 0; i < criterion.descriptions.length; i++) {
+                const rate = `<input required type="radio" name="${criterion.name.replace(/ /g, '')}" id="${criterion.name.replace(/ /g, '')}-${i + 1}" value="${i + 1}" onClick="(() => {
+                    document
+                        .querySelector('#main > #submitAnEvaluation > #form > .criteria > div > .criterion:has(#rating > #${criterion.name.replace(/ /g, '')}-${i + 1}) > #description')
+                        .innerText = '${criterion.descriptions[i]}';
+                })()">`;
+                criterionElement.querySelector('#rating').innerHTML += rate;
+            };
+            criteriaContainer.appendChild(criterionElement);
+            i++;
+        };
+    };
+
+    {
+        const criteria = document.createElement('div');
+        criteria.classList.add('criteria');
+        criteria.innerHTML = `
+            <h2>Class Standing</h2>
+            <div></div>
+        `;
+        document.querySelector('#main > #submitAnEvaluation > #form').appendChild(criteria);
+        let i = 0;
+        const criteriaContainer = criteria.querySelector('div');
+        for (const criterion of ClassStanding) {
+            const criterionElement = document.createElement('div');
+            criterionElement.id = criterion.name.replace(/ /g, '');
+            criterionElement.classList.add('criterion');
+            if (i % 2 == 0) {
+                criterionElement.classList.add('even');
+            };
+            criterionElement.innerHTML = `
+                <h4>${criterion.name}</h4>
+                <div id="rating">
+                </div>
+                <p id="description"></p>
+            `;
+            for (let i = 0; i < criterion.descriptions.length; i++) {
+                const rate = `<input required type="radio" name="${criterion.name.replace(/ /g, '')}" id="${criterion.name.replace(/ /g, '')}-${i + 1}" value="${i + 1}" onClick="(() => {
+                    document
+                        .querySelector('#main > #submitAnEvaluation > #form > .criteria > div > .criterion:has(#rating > #${criterion.name.replace(/ /g, '')}-${i + 1}) > #description')
+                        .innerText = '${criterion.descriptions[i]}';
+                })()">`;
+                criterionElement.querySelector('#rating').innerHTML += rate;
+            };
+            criteriaContainer.appendChild(criterionElement);
+            i++;
+        };
+    };
+
+    document.querySelector('#main > #submitAnEvaluation > #form').innerHTML += `
+        <div class="textInput">
+            <label for="additionalStatement">
+                <h6>Additional Statement</h6>
+            </label>
+            <textarea required type="text" name="additionalStatement" id="additionalStatement"
+                placeholder="Justify your rating" cols="30" rows="10"></textarea>
+        </div>
+
+        <span>
+            <button type="submit" class="button">
+                <p><b>Submit</b></p>
+            </button>
+        </span>
+    `;
+
+    document.querySelector('#main > #submitAnEvaluation > #form > span > .button').addEventListener('click', () => {
+        const studentNumber = document.querySelector('#main > #submitAnEvaluation > #form > #student > #studentIdentification > #studentNumber').innerText;
+        const additionalStatement = document.querySelector('#main > #submitAnEvaluation > #form > .textInput > #additionalStatement').value;
+        /**
+         * @type {{
+         *      name: String,
+         *      value: String,
+         *      category: String
+         * }[]}
+         */
+        const criteria = [];
+        for (const criterion of Array.from(document.querySelectorAll('#main > #submitAnEvaluation > #form > .criteria > div > .criterion'))) {
+            const name = criterion.id;
+            const checked = document.querySelector(`#main > #submitAnEvaluation > #form > .criteria > div > .criterion#${name} > #rating > input:checked`);
+            const value = checked ? checked.value : '';
+            criteria.push({
+                name,
+                value,
+                category: document.querySelector(`#main > #submitAnEvaluation > #form > .criteria:has(#${name}) > h2`).innerText
+            });
+        };
+        const data = {
+            /** @type {String} */
+            receiverStudentNumber: studentNumber,
+            /** @type {String} */
+            additionalStatement,
+            evaluation: criteria
+        };
+
+        for (const criterion of criteria) {
+            if (criterion.value == '') {
+                alertUser('Error', 'Please rate all criteria.', 'alert');
+                return;
+            };
+        };
+        if (data.additionalStatement == '') {
+            alertUser('Error', 'Please justify your rating.', 'alert');
+            return;
+        } else if (data.additionalStatement.length > 500) {
+            alertUser('Error', 'Additional statement must not exceed 500 characters.', 'alert');
+            return;
+        };
+
+        document.querySelector('#main > #submitAnEvaluation > #form > span > .button').disabled = true;
+
+        fetch('/api/submitAnEvaluation/submit.php', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.text())
+            .then(res => {
+                console.log(res);
+                document.querySelector('#main > #submitAnEvaluation > #form > span > .button').disabled = false;
+                /** @type {import("../utils/types").Response}*/
+                const response = JSON.parse(res);
+                if (response.status == 'success') {
+                    alertUser('Success', 'Evaluation submitted.', 'success');
+                    submitAnEvaluationButton.click();
+                } else {
+                    alertUser('Error', response.message, 'alert');
+                };
+            });
+    });
 });
 yourEvaluationsButton.addEventListener('click', () => {
     pagesButton(false, yourEvaluationsButton);
     main.appendChild(yourEvaluations);
+    main.innerHTML = `
+        <div id="yourEvaluations">
+            <h2>Your Evaluations</h2>
+            <div id="search">
+                <div class="textInput">
+                    <label for="searchStudent">
+                        <h6>Search</h6>
+                    </label>
+                    <input required type="search" name="searchStudent" id="searchStudent" placeholder="Student">
+                </div>
+                <div>
+                    <button class="button" onclick="(() => {
+                        event.srcElement.disabled = true;
+                    })();" id="search">
+                        <p><b>Search</b></p>
+                    </button>
+                </div>
+            </div>
+
+            <div id="evaluations"></div>
+        </div>
+    `;
+
+    evaluationsList.length = 0;
+
+    fetch('/api/yourEvaluations/retrieve.php', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.text())
+        .then(res => {
+            console.log(res);
+            /** @type {import("../utils/types").Response}*/
+            const response = JSON.parse(res);
+            if (response.status == 'success') {
+                if (response.payload.length == 0) {
+                    alertUser('404', 'No evaluations more found.', 'alert');
+                    return;
+                };
+                for (const evaluation of response.payload) {
+                    evaluation.contents = JSON.parse(evaluation.contents);
+                    displayEvaluation(evaluation, document.querySelector('#main > #yourEvaluations > #evaluations'));
+                    evaluationsList.push(evaluation);
+                };
+            } else {
+                alertUser('Error', response.message, 'alert');
+            };
+        });
 });
 
 
@@ -237,5 +773,66 @@ pagesButton(true);
 
 
 
-window.addEventListener('scroll', (e) => {
+window.addEventListener('scroll', async (e) => {
+    // Check if the page is scrolled to the bottom
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        // Check which page is active
+        switch (window.location.hash.substring(1)) {
+            case 'profileAndEvaluations':
+                fetch(`./api/profileAndEvaluations/evaluations.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.text())
+                    .then(res => {
+                        console.log(res);
+                        /** @type {import("../utils/types").Response}*/
+                        const response = JSON.parse(res);
+                        for (const evaluation of response.payload) {
+                            evaluation.contents = JSON.parse(evaluation.contents);
+                            evaluation.receiverStudentNumber = null;
+                            displayEvaluation(evaluation, document.querySelector('#main > #profileAndEvaluations > #evaluations'));
+                            evaluationsList.push(evaluation);
+                        };
+                    }).catch(err => {
+                        console.log(err);
+                        alertUser('Error', 'Failed to load more evaluations.', 'alert');
+                    });
+                break;
+            case 'submitAnEvaluation':
+                break;
+            case 'yourEvaluations':
+                fetch(`./api/yourEvaluations/retrieve.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.text())
+                    .then(res => {
+                        console.log(res);
+                        /** @type {import("../utils/types").Response}*/
+                        const response = JSON.parse(res);
+                        if (response.status == 'success') {
+                            if (response.payload.length == 0) {
+                                alertUser('404', 'No evaluations more found.', 'alert');
+                                return;
+                            };
+                            for (const evaluation of response.payload) {
+                                evaluation.contents = JSON.parse(evaluation.contents);
+                                displayEvaluation(evaluation, document.querySelector('#main > #yourEvaluations > #evaluations'));
+                                evaluationsList.push(evaluation);
+                            };
+                        } else {
+                            alertUser('Error', response.message, 'alert');
+                        };
+                    }).catch(err => {
+                        console.log(err);
+                        alertUser('Error', 'Failed to load more evaluations.', 'alert');
+                    });
+                break;
+            default:
+                break;
+        };
+    };
 });

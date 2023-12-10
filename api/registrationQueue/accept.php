@@ -113,6 +113,7 @@ $student = mysqli_fetch_assoc($student);
 $firstName = $student['firstName'];
 $middleName = $student['middleName'];
 $lastName = $student['lastName'];
+$fullName = $student['fullName'];
 $studentNumber = $student['studentNumber'];
 $gender = $student['gender'];
 $birthday = $student['birthday'];
@@ -125,8 +126,8 @@ $password = $student['password'];
 $timeAdded = $student['timeAdded'];
 $token = $student['token'];
 
-$query = "INSERT INTO students (firstName, middleName, lastName, studentNumber, gender, birthday, profilePicture, course, year, section, email, password, token, timeAdded)
-                VALUES ('$firstName', '$middleName', '$lastName', '$studentNumber', '$gender', '$birthday', '$profilePicture', '$course', '$year', '$section', '$email', '$password', '$token', '$timeAdded')";
+$query = "INSERT INTO students (firstName, middleName, lastName, fullName, studentNumber, gender, birthday, profilePicture, course, year, section, email, password, token, timeAdded)
+                VALUES ('$firstName', '$middleName', '$lastName', '$fullName', '$studentNumber', '$gender', '$birthday', '$profilePicture', '$course', '$year', '$section', '$email', '$password', '$token', '$timeAdded')";
 $student = mysqli_query($databaseConnection, $query);
 
 if (!$student) {

@@ -63,6 +63,9 @@ body::after {
 #main #header img {
 	height: 12rem;
 }
+#header > div > :first-child {
+    color: var(--color-primary);
+}
 #loginForm {
 	width: 100%;
 	gap: 2rem;

@@ -365,6 +365,103 @@ $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
                 </div>
             </div>
         </div> -->
+
+        <!-- <div id="submitAnEvaluation">
+            <div id="students">
+                <div id="search">
+                    <div class="textInput">
+                        <label for="searchStudent">
+                            <h6>Search</h6>
+                        </label>
+                        <input required type="search" name="searchStudent" id="searchStudent" placeholder="Student">
+                    </div>
+
+                    <span>
+                        <button class="button">
+                            <p><b>Search</b></p>
+                        </button>
+                    </span>
+                </div>
+
+                <div class="student active">
+                    <img src="./assets/Student Picture.png" alt="Profile Picture">
+                    <div id="studentIdentification">
+                        <h5>John Dougma Backt</h5>
+                        <h5>20-00001</h5>
+                    </div>
+                </div>
+                <div class="student">
+                    <img src="./assets/Student Picture.png" alt="Profile Picture">
+                    <div id="studentIdentification">
+                        <h5>John Dougma Backt</h5>
+                        <h5>20-00001</h5>
+                    </div>
+                </div>
+            </div>
+
+            <form id="form">
+                <div id="student">
+                    <img src="./assets/Student Picture.png" alt="Profile Picture">
+                    <div id="studentIdentification">
+                        <h5>John Dougma Backt</h5>
+                        <h5>20-00001</h5>
+                    </div>
+                </div>
+
+                <div class="criteria">
+                    <h2>Class Behavior</h2>
+                    <div>
+                        <div class="criterion">
+                            <h4>Participation</h4>
+                            <div class="rating">
+                                <input required type="radio" name="participation" value="1">
+                                <input required type="radio" name="participation" value="2">
+                                <input required type="radio" name="participation" value="3">
+                                <input required type="radio" name="participation" value="4">
+                                <input required type="radio" name="participation" value="5">
+                            </div>
+                            <p>Description</p>
+                        </div>
+                        <div class="criterion">
+                            <h4>Punctuality</h4>
+                            <div class="rating">
+                                <input required type="radio" name="punctuality" value="1">
+                                <input required type="radio" name="punctuality" value="2">
+                                <input required type="radio" name="punctuality" value="3">
+                                <input required type="radio" name="punctuality" value="4">
+                                <input required type="radio" name="punctuality" value="5">
+                            </div>
+                            <p>Description</p>
+                        </div>
+                        <div class="criterion">
+                            <h4>Respect</h4>
+                            <div class="rating">
+                                <input required type="radio" name="respect" value="1">
+                                <input required type="radio" name="respect" value="2">
+                                <input required type="radio" name="respect" value="3">
+                                <input required type="radio" name="respect" value="4">
+                                <input required type="radio" name="respect" value="5">
+                            </div>
+                            <p>Description</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="textInput">
+                    <label for="additionalStatement">
+                        <h6>Additional Statement</h6>
+                    </label>
+                    <textarea required type="text" name="additionalStatement" id="additionalStatement"
+                        placeholder="Type here" cols="30" rows="10"></textarea>
+                </div>
+
+                <span>
+                    <button type="submit" class="button">
+                        <p><b>Submit</b></p>
+                    </button>
+                </span>
+            </form>
+        </div> -->
     </div>
 </body>
 

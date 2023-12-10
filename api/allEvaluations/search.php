@@ -19,17 +19,6 @@ $databaseConnection = databaseConnection();
 
 
 
-// Check if request is GET
-if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-    echo <<<EOT
-        {
-            "message": "Invalid request method",
-            "status": "error",
-            "code": 500
-        }
-    EOT;
-    exit();
-};
 // Get the request cookies
 $cookies = $_COOKIE;
 $token = $cookies['token'];
@@ -37,9 +26,15 @@ $token = $cookies['token'];
 // Get query parameters
 $urlQuery = $_GET;
 $params = array_keys($urlQuery);
-$start = 0;
-if (in_array('start', $params)) {
-    $start = $urlQuery['start'];
+$search = '';
+if (in_array('search', $params)) {
+    $search = $urlQuery['search'];
+};
+
+
+
+if ($search == '') {
+    header('Location: retrieve.php');
 };
 
 
@@ -58,15 +53,25 @@ if (!$admin) {
     exit();
 };
 
-// Get the registrants
-// Add the row number to the query
-$query = "SELECT * FROM system_logs WHERE timeAdded > $start ORDER BY timeAdded ASC Limit 50";
-$registrants = mysqli_query($databaseConnection, $query);
+// Search for the evaluations
+// Search prameters are:
+// 1. Evaluation id
+// 2. Student id
+// 4. Evaluation date
 
-if (!$registrants) {
+$query = "SELECT * FROM evaluations WHERE
+    (evaluationID LIKE '$search'
+    OR senderStudentNumber LIKE '$search'
+    OR receiverStudentNumber LIKE '$search'
+    OR senderName LIKE '$search'
+    OR receiverName LIKE '$search'
+    OR timeAdded LIKE '$search')";
+$evaluations = mysqli_query($databaseConnection, $query);
+
+if (!$evaluations) {
     echo <<<EOT
         {
-            "message": "Error fetching registrants",
+            "message": "Something went wrong while fetching evaluations",
             "status": "error",
             "code": 500
         }
@@ -74,17 +79,19 @@ if (!$registrants) {
     exit();
 };
 
-$registrantsArray = array();
-while ($registrant = mysqli_fetch_assoc($registrants)) {
-    array_push($registrantsArray, $registrant);
+// Return the evaluations
+$evaluationsArray = [];
+while ($evaluation = mysqli_fetch_assoc($evaluations)) {
+    array_push($evaluationsArray, $evaluation);
 };
-$registrantsArray = json_encode($registrantsArray);
+
+$evaluationsArray = json_encode($evaluationsArray);
 
 echo <<<EOT
     {
-        "message": "Registrants fetched successfully",
+        "message": "Evaluations fetched successfully",
         "status": "success",
         "code": 200,
-        "payload": $registrantsArray
+        "payload": $evaluationsArray
     }
 EOT;
