@@ -88,9 +88,23 @@ foreach ($evaluations as &$evaluation) {
     $result = mysqli_query($databaseConnection, $query);
     $sender = mysqli_fetch_assoc($result);
 
+    if (!$sender) {
+        $query = "SELECT fullName FROM registrants WHERE studentNumber = '$senderStudentNumber'";
+        $result = mysqli_query($databaseConnection, $query);
+        $sender = mysqli_fetch_assoc($result);
+        $sender['fullName'] = $sender['fullName'] . ' [Registrant]';
+    };
+
     $query = "SELECT fullName FROM students WHERE studentNumber = '$receiverStudentNumber'";
     $result = mysqli_query($databaseConnection, $query);
     $receiver = mysqli_fetch_assoc($result);
+
+    if (!$receiver) {
+        $query = "SELECT fullName FROM registrants WHERE studentNumber = '$receiverStudentNumber'";
+        $result = mysqli_query($databaseConnection, $query);
+        $receiver = mysqli_fetch_assoc($result);
+        $receiver['fullName'] = $receiver['fullName'] . ' [Registrant]';
+    };
 
     $evaluation['senderName'] = $sender['fullName'];
     $evaluation['receiverName'] = $receiver['fullName'];

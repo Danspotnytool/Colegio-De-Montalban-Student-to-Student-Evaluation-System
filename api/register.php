@@ -19,6 +19,50 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 include('../utils/databaseConnection.php');
 $databaseConnection = databaseConnection();
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../includes/PHPMailer/src/Exception.php';
+require '../includes/PHPMailer/src/PHPMailer.php';
+require '../includes/PHPMailer/src/SMTP.php';
+
+
+
+function sendEmail($receiver, $subject, $body)
+{
+    $mail = new PHPMailer(true);
+
+    // Get env variables
+    $env = parse_ini_file('../.env');
+    $GMAIL_EMAIL_ADDRESS = $env['GMAIL_EMAIL_ADDRESS'];
+    $GMAIL_EMAIL_PASSWORD = $env['GMAIL_EMAIL_PASSWORD'];
+
+
+
+    try {
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = $GMAIL_EMAIL_ADDRESS;
+        $mail->Password = $GMAIL_EMAIL_PASSWORD;
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->setFrom($GMAIL_EMAIL_ADDRESS, 'CDM Student Evaluation');
+        $mail->addAddress($receiver);
+
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+
+        $mail->send();
+        return true;
+    } catch (Exception $th) {
+        return false;
+    };
+};
+
 $body = trim(file_get_contents('php://input'));
 
 $admin = json_decode($body);
@@ -270,12 +314,39 @@ $profilePicture = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[H
 
 
 // Insert data to database table "registrants"
-$insertQuery = "INSERT INTO registrants (firstName, middleName, lastName, fullName studentNumber, gender, birthday, profilePicture, course, year, section, email, password, token, timeAdded)
-                    VALUES ('$firstName', '$middleName', '$lastName', $fullName, '$studentNumber', '$gender', '$birthday', '$profilePicture', '$course', '$year', '$section', '$emailAddress', '$hashedPassword', '$token', '$dateTime')";
+$insertQuery = "INSERT INTO registrants (firstName, middleName, lastName, fullName, studentNumber, gender, birthday, profilePicture, course, year, section, email, password, token, timeAdded)
+                    VALUES ('$firstName', '$middleName', '$lastName', '$fullName', '$studentNumber', '$gender', '$birthday', '$profilePicture', '$course', '$year', '$section', '$emailAddress', '$hashedPassword', '$token', '$dateTime')";
+
 if (mysqli_query($databaseConnection, $insertQuery)) {
     $retrieveQuery = "SELECT * FROM registrants WHERE studentNumber = '$studentNumber'";
     if ($result = mysqli_query($databaseConnection, $retrieveQuery)) {
         $row = mysqli_fetch_assoc($result);
+
+
+
+        // Send email to the registrant
+        $subject = 'CDM Student Evaluation Registration';
+
+        $body = <<<EOT
+            <p>Hi $fullName,</p>
+            <p>Thank you for registering to CDM Student Evaluation.</p>
+            <p>Please wait for the admin to verify your account.</p>
+            <p>Thank you.</p>
+        EOT;
+
+        if (!sendEmail($emailAddress, $subject, $body)) {
+            echo <<<EOT
+                {
+                    "message": "Registration Failed",
+                    "status": "error",
+                    "code": 500
+                }
+            EOT;
+            exit();
+        };
+
+
+
         $jsonEncoded = json_encode($row);
         echo <<<EOT
             {

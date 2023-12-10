@@ -240,8 +240,8 @@ const displayEvaluation = (evaluation, parent) => {
             if (evaluation.receiverName) {
                 return `
                     <div class="users">
-                        <h6><span style="font-family: unset;">From:</span> <span style="font-family: unset;">${evaluation.senderName} (${evaluation.senderStudentNumber})</span></h6>
-                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} (${evaluation.receiverStudentNumber})</span></h6>
+                        <h6><span style="font-family: unset;">From:</span> <span style="font-family: unset;">${evaluation.senderName} [${evaluation.senderStudentNumber}]</span></h6>
+                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} [${evaluation.receiverStudentNumber}]</span></h6>
                     </div>
                 `;
             };
