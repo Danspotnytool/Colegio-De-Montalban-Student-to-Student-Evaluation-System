@@ -240,8 +240,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 	content: "";
 	height: 1.5rem;
 	width: 2rem;
-	top: calc(100% - 3rem);
+	top: calc(100% - 2.6rem);
 	right: 2rem;
+	background-color: var(--color-shade-light);
 	display: block;
 	position: absolute;
 	z-index: 1;
@@ -273,8 +274,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 
 .alertCardBackground {
-	height: 100vh;
-	width: 100vw;
+	height: 100%;
+	width: 100%;
 	top: 0;
 	left: 0;
 	background-color: var(--color-shade-dark);

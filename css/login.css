@@ -49,9 +49,23 @@ body::after {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	background-color: var(--color-plain);
+}
+@media screen and (max-width: 50rem) {
+	#main {
+		padding: 0;
+	}
+	#loginPanel {
+		min-height: 100%;
+		width: 100%;
+		padding: 8rem 8rem;
+		gap: 4rem;
+		border: unset;
+		justify-content: flex-start;
+		position: absolute;
+	}
 }
 #main #header {
 	gap: 0.8rem;
@@ -73,4 +87,9 @@ body::after {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+@media screen and (max-width: 50rem) {
+	#loginForm {
+		gap: 2rem;
+	}
 }

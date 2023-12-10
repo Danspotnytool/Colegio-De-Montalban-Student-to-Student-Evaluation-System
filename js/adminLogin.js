@@ -41,14 +41,17 @@ loginButton.addEventListener('click', (e) => {
                     const postscript = document.createElement('p');
                     postscript.classList.add('postscript');
                     postscript.textContent = response.message;
+                    alertUser('Invalid', response.message, 'warning');
                     loginForm.insertBefore(postscript, loginForm.children[loginForm.children.length - 1]);
                 };
             }).catch((error) => {
                 postscript.textContent = error;
+                alertUser('Invalid', error, 'warning');
                 loginForm.insertBefore(postscript, loginForm.children[loginForm.children.length - 1]);
             });
     } else {
         postscript.textContent = 'Invalid Admin ID or Admin Key';
+        alertUser('Invalid', 'Invalid Admin ID or Admin Key', 'warning');
         loginForm.insertBefore(postscript, loginForm.children[loginForm.children.length - 1]);
     };
 });

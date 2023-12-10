@@ -42,6 +42,11 @@ body::after {
 	justify-content: center;
 	align-items: center;
 }
+@media screen and (max-width: 50rem) {
+	#main {
+		padding: 0;
+	}
+}
 #registerPanel {
 	padding: 4rem 8rem;
 	gap: 4rem;
@@ -63,6 +68,9 @@ body::after {
 #main #header img {
 	height: 12rem;
 }
+#header > div > :first-child {
+    color: var(--color-primary);
+}
 #registerForm {
 	width: 100%;
 	gap: 2rem;
@@ -81,6 +89,16 @@ body::after {
 }
 #registerForm > span .textInput {
 	width: 18rem;
+}
+@media screen and (max-width: 50rem) {
+	#registerForm > span {
+		flex-direction: column;
+	}
+	#registerForm > span .textInput,
+	#registerForm > span .dropdown {
+		width: 100%;
+		max-width: 50rem;
+	}
 }
 
 #profilePicture {

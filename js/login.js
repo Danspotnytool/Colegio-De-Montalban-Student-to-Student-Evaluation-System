@@ -9,6 +9,8 @@ loginButton.addEventListener('click', (e) => {
         warning.remove();
     };
 
+    loginButton.disabled = true;
+
     const studentNumber = document.getElementById('studentNumber').value;
     const password = document.getElementById('password').value;
 
@@ -39,15 +41,20 @@ loginButton.addEventListener('click', (e) => {
                     window.location.reload();
                 } else {
                     postscript.textContent = response.message;
+                    alertUser('Error', response.message, 'warning');
                     loginForm.insertBefore(postscript, loginForm.children[loginForm.children.length - 1]);
                 };
             }).catch((error) => {
                 console.log(error);
+                loginButton.disabled = false;
                 postscript.textContent = error;
+                alertUser('Error', error, 'warning');
                 loginForm.insertBefore(postscript, loginForm.children[loginForm.children.length - 1]);
             });
     } else {
+        loginButton.disabled = false;
         postscript.textContent = 'Invalid Student Number or Password';
+        alertUser('Invalid', 'Invalid Student Number or Password', 'warning');
         loginForm.insertBefore(postscript, loginForm.children[loginForm.children.length - 1]);
     };
 });

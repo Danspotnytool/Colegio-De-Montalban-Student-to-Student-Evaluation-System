@@ -43,12 +43,14 @@ registerButton.addEventListener('click', (e) => {
         confirmPassword.value !== ''
     ) { } else {
         postscript.textContent = 'Please fill out all fields';
+        alertUser('Invalid', 'Please fill out all fields', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
 
     if (password.value !== confirmPassword.value) {
         postscript.textContent = 'Passwords do not match';
+        alertUser('Invalid', 'Passwords do not match', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -56,6 +58,7 @@ registerButton.addEventListener('click', (e) => {
     // Limit the size of the profilePicture to 2MB
     if (profilePicture.size > 2000000) {
         postscript.textContent = 'Profile picture is too large';
+        alertUser('Invalid', 'Profile picture is too large', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -65,6 +68,7 @@ registerButton.addEventListener('click', (e) => {
     const studentNumberRegex = /^[0-9]{2}-[0-9]{5}$/;
     if (!studentNumberRegex.test(studentNumber.value)) {
         postscript.textContent = 'Invalid student number';
+        alertUser('Invalid', 'Invalid student number', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -77,6 +81,7 @@ registerButton.addEventListener('click', (e) => {
         gender.value !== ''
     ) {
         postscript.textContent = 'Invalid Gender';
+        alertUser('Invalid', 'Invalid Gender', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -96,6 +101,7 @@ registerButton.addEventListener('click', (e) => {
         course.value !== 'BSE'
     ) {
         postscript.textContent = 'Invalid Course';
+        alertUser('Invalid', 'Invalid Course', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -108,6 +114,7 @@ registerButton.addEventListener('click', (e) => {
     const birthdayRegex = /^[0-9]{10,30}$/;
     if (!birthdayRegex.test(birthdayEpoch)) {
         postscript.textContent = 'Invalid birthday';
+        alertUser('Invalid', 'Invalid birthday', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -116,6 +123,7 @@ registerButton.addEventListener('click', (e) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(emailAddress.value)) {
         postscript.textContent = 'Invalid email address';
+        alertUser('Invalid', 'Invalid email address', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -126,6 +134,7 @@ registerButton.addEventListener('click', (e) => {
     if (!yearAndSectionRegex.test(yearAndSection.value)) {
         console.log('a');
         postscript.textContent = 'Invalid year and section';
+        alertUser('Invalid', 'Invalid year and section', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -138,6 +147,7 @@ registerButton.addEventListener('click', (e) => {
     const passwordRegex1 = /^.{8,}$/;
     if (!passwordRegex1.test(password.value)) {
         postscript.textContent = 'Password must be at least 8 characters long';
+        alertUser('Invalid', 'Password must be at least 8 characters long', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -145,6 +155,7 @@ registerButton.addEventListener('click', (e) => {
     const passwordRegex2 = /[A-Z]/;
     if (!passwordRegex2.test(password.value)) {
         postscript.textContent = 'Password must contain at least one uppercase letter';
+        alertUser('Invalid', 'Password must contain at least one uppercase letter', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -152,6 +163,7 @@ registerButton.addEventListener('click', (e) => {
     const passwordRegex3 = /[a-z]/;
     if (!passwordRegex3.test(password.value)) {
         postscript.textContent = 'Password must contain at least one lowercase letter';
+        alertUser('Invalid', 'Password must contain at least one lowercase letter', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -159,6 +171,7 @@ registerButton.addEventListener('click', (e) => {
     const passwordRegex4 = /[0-9]/;
     if (!passwordRegex4.test(password.value)) {
         postscript.textContent = 'Password must contain at least one number';
+        alertUser('Invalid', 'Password must contain at least one number', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -166,6 +179,7 @@ registerButton.addEventListener('click', (e) => {
     const passwordRegex5 = /[^a-zA-Z0-9]/;
     if (!passwordRegex5.test(password.value)) {
         postscript.textContent = 'Password must contain at least one special character';
+        alertUser('Invalid', 'Password must contain at least one special character', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
         return;
     };
@@ -221,10 +235,12 @@ registerButton.addEventListener('click', (e) => {
                     window.location = '/login.php';
                 } else {
                     postscript.textContent = response.message;
+                    alertUser('Invalid', response.message, 'warning');
                     registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
                 };
             }).catch((error) => {
                 postscript.textContent = error;
+                alertUser('Invalid', error, 'warning');
                 registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
             });
     };

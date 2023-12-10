@@ -20,6 +20,7 @@ const alertUser = (title, message, level, callback) => {
     `;
 
 
+
     document.body.appendChild(alertCardBackground);
     document.body.appendChild(alertCard);
 
