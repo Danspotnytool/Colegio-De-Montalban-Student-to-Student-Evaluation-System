@@ -249,6 +249,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 	padding: 1rem 4rem;
 	border: unset;
 	border-radius: 0.8rem;
+	background-color: var(--color-secondary);
 	color: var(--color-shade-light) !important;
 	text-decoration: none;
 	display: inline-flex;
@@ -259,7 +260,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 	overflow: hidden;
 }
 .button:disabled {
-	filter: invert(0.25);
+	background-blend-mode: lighten;
+	cursor: progress;
 }
 .button.sub {
 	color: var(--color-secondary) !important;
@@ -271,26 +273,11 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .button:hover {
 	filter: unset;
 }
-.button:disabled:hover {
-	filter: invert(0.25);
-}
 .button * {
 	position: relative;
 	z-index: 1;
 }
-.button::before {
-	content: "";
-	height: 100%;
-	width: 100%;
-	top: 0;
-	left: 0;
-	background-color: var(--color-secondary);
-	display: block;
-	position: absolute;
-	z-index: 0;
-	pointer-events: none;
-}
-.button.sub::before {
+.button.sub {
 	background-color: var(--color-shade-light);
 }
 .button::after {
@@ -309,6 +296,75 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 .button:hover::after {
 	transform: translateX(0) translateY(0) scale(200%) rotate(360deg);
+}
+.button:disabled:before {
+	content: "";
+	height: unset;
+	width: unset;
+	top: unset;
+	left: unset;
+	background-color: unset;
+	display: unset;
+	position: unset;
+	z-index: unset;
+	pointer-events: unset;
+}
+.button:disabled:before {
+	height: 4rem;
+	width: 4rem;
+	top: calc(50% - 2rem);
+	left: calc(50% - 2rem);
+	border-top: solid 0.4rem rgba(0, 0, 0, 0);
+	border-left: solid 0.4rem var(--color-primary);
+	border-right: solid 0.4rem rgba(0, 0, 0, 0);
+	border-bottom: solid 0.4rem rgba(0, 0, 0, 0);
+	box-sizing: border-box;
+	border-radius: 50%;
+	position: absolute;
+	z-index: 5;
+
+	animation: loading 0.5s infinite;
+}
+.button:disabled::after {
+	content: "";
+	height: unset;
+	width: unset;
+	top: unset;
+	left: unset;
+	background-color: unset;
+	display: unset;
+	position: unset;
+	z-index: unset;
+	transform: unset;
+	transform-origin: unset;
+	transition: unset;
+
+	height: 4rem;
+	width: 4rem;
+	top: calc(50% - 2rem);
+	left: calc(50% - 2rem);
+	border-top: solid 0.4rem var(--color-primary);
+	border-left: solid 0.4rem rgba(0, 0, 0, 0);
+	border-right: solid 0.4rem var(--color-primary);
+	border-bottom: solid 0.4rem rgba(0, 0, 0, 0);
+	box-sizing: border-box;
+	border-radius: 50%;
+	position: absolute;
+	z-index: 5;
+
+	animation: loading 1s infinite;
+}
+.button:disabled:hover::after {
+	transform: unset;
+}
+
+@keyframes loading {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 .alertCardBackground {
