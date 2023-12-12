@@ -49,5 +49,27 @@
  */
 
 
+
+/**
+ * @typedef {{
+ *      id: String,
+ *      timeAdded: String,
+ *      content: {
+ *          time: String,
+ *          type: 'visit' | 'redirect',
+ *          payload:{
+ *              path: String,
+ *              ip:{
+ *                  HTTP_X_FORWARDED_FOR: String,
+ *                  HTTP_CLIENT_IP: String
+ *              },
+ *              userAgent: String
+ *          }
+ *      }
+ * }} SystemLogs
+ */
+
+
+
 // This part is unrelated to the above types, but it's required as a workaround to export types.
 module.exports = {};

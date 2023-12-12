@@ -23,6 +23,8 @@ systemLogs.id = 'systemLogs';
 const studentsList = [];
 /** @type {import("../utils/types").Evaluation[]} */
 const evaluationsList = [];
+/** @type {import("../utils/types").SystemLogs[]} */
+const systemLogsList = [];
 
 
 
@@ -1125,7 +1127,7 @@ registrationQueueButton.addEventListener('click', () => {
     main.appendChild(registrationQueue);
 
     registrationQueue.innerHTML = `
-    <h2 style="width: 100%; text-align: center;">Rgistration Queue</h2>
+    <h2 style="width: 100%; text-align: center;">Registration Queue</h2>
     <div id="header">
         <div class="textInput" style="color: unset;">
             <label for="student">
@@ -1978,6 +1980,62 @@ registrationQueueButton.addEventListener('click', () => {
 });
 systemLogsButton.addEventListener('click', () => {
     pagesButton(false, systemLogsButton);
+    main.appendChild(systemLogs);
+
+    systemLogs.innerHTML = `
+    <h2 style="width: 100%; text-align: center;">System Logs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th><h5>Time</h5></th>
+                <th><h5>Content</h5></th>
+            </tr>
+        </thead>
+
+        <tbody id="logs">
+        </tbody>
+    </table>
+    `;
+
+    fetch('/api/systemLogs/retrieve.php', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.text())
+        .then(res => {
+            /** @type {import("../utils/types").Response}*/
+            const response = JSON.parse(res);
+            /** @type {import("../utils/types").SystemLogs[]}*/
+            const systemLogsPayload = response.payload;
+
+            for (const log of systemLogsPayload) {
+                systemLogsList.push(log);
+                const logElement = document.createElement('tr');
+                logElement.innerHTML = `
+                    <td style="
+                        white-space: nowrap;
+                    ">${(() => {
+                        const date = new Date(parseInt(log.timeAdded * 1000));
+                        const year = date.getFullYear();
+                        const month = date.getMonth() + 1;
+                        const day = date.getDate();
+                        const hour = date.getHours();
+                        const minute = date.getMinutes();
+                        const second = date.getSeconds();
+                        return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day} ${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`;
+                    })()}</td>
+                    <td>
+                        <pre>${JSON.stringify(JSON.parse(log.content), null, 4)}</pre>
+                    </td>
+                `;
+
+                systemLogs.querySelector('#logs').appendChild(logElement);
+            };
+        }).catch(error => {
+            console.log(error);
+            alertUser('Error', 'An error occured while fetching the system logs.', 'alert');
+        });
 });
 
 
@@ -2521,6 +2579,45 @@ window.addEventListener('scroll', async (e) => {
                     });
                 break;
             case 'systemLogs':
+                fetch(`/api/systemLogs/retrieve.php?start=${systemLogsList[systemLogsList.length - 1].timeAdded}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => response.text())
+                    .then(res => {
+                        /** @type {import("../utils/types").Response}*/
+                        const response = JSON.parse(res);
+                        /** @type {import("../utils/types").SystemLogs[]}*/
+                        const systemLogsPayload = response.payload;
+
+                        for (const log of systemLogsPayload) {
+                            systemLogsList.push(log);
+                            const logElement = document.createElement('tr');
+                            logElement.innerHTML = `
+                                <td style="
+                                    white-space: nowrap;
+                                ">${(() => {
+                                    const date = new Date(parseInt(log.timeAdded * 1000));
+                                    const year = date.getFullYear();
+                                    const month = date.getMonth() + 1;
+                                    const day = date.getDate();
+                                    const hour = date.getHours();
+                                    const minute = date.getMinutes();
+                                    const second = date.getSeconds();
+                                    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day} ${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`;
+                                })()}</td>
+                                <td>
+                                    <pre>${JSON.stringify(JSON.parse(log.content), null, 4)}</pre>
+                                </td>
+                            `;
+
+                            systemLogs.querySelector('#logs').appendChild(logElement);
+                        };
+                    }).catch(error => {
+                        console.log(error);
+                        alertUser('Error', 'An error occured while fetching the system logs.', 'alert');
+                    });
                 break;
             default:
                 break;

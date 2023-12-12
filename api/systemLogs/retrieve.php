@@ -58,15 +58,15 @@ if (!$admin) {
     exit();
 };
 
-// Get the registrants
+// Get the systemLogs
 // Add the row number to the query
-$query = "SELECT * FROM system_logs WHERE timeAdded > $start ORDER BY timeAdded ASC Limit 50";
-$registrants = mysqli_query($databaseConnection, $query);
+$query = "SELECT * FROM system_logs WHERE timeAdded > $start ORDER BY timeAdded DESC Limit 50";
+$systemLogs = mysqli_query($databaseConnection, $query);
 
-if (!$registrants) {
+if (!$systemLogs) {
     echo <<<EOT
         {
-            "message": "Error fetching registrants",
+            "message": "Error fetching System Logs",
             "status": "error",
             "code": 500
         }
@@ -74,17 +74,17 @@ if (!$registrants) {
     exit();
 };
 
-$registrantsArray = array();
-while ($registrant = mysqli_fetch_assoc($registrants)) {
-    array_push($registrantsArray, $registrant);
+$systemLogsArray = array();
+while ($registrant = mysqli_fetch_assoc($systemLogs)) {
+    array_push($systemLogsArray, $registrant);
 };
-$registrantsArray = json_encode($registrantsArray);
+$systemLogsArray = json_encode($systemLogsArray);
 
 echo <<<EOT
     {
-        "message": "Registrants fetched successfully",
+        "message": "systemLogs fetched successfully",
         "status": "success",
         "code": 200,
-        "payload": $registrantsArray
+        "payload": $systemLogsArray
     }
 EOT;

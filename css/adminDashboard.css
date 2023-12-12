@@ -7,7 +7,8 @@
 }
 #main > #allEvaluations,
 #main > #allStudents,
-#main > #registrationQueue {
+#main > #registrationQueue,
+#main > #systemLogs {
     width: 100%;
     max-width: 120rem;
     padding: 8rem;
@@ -20,13 +21,15 @@
 @media only screen and (max-width: 50rem) {
     #main > #allEvaluations,
     #main > #allStudents,
-    #main > #registrationQueue {
+    #main > #registrationQueue,
+    #main > #systemLogs {
         padding: 8rem 4rem;
     }
 }
 #main > #allEvaluations > #header,
 #main > #allStudents > #header,
-#main > #registrationQueue > #header {
+#main > #registrationQueue > #header,
+#main > #systemLogs > #header {
     width: 100%;
     gap: 1rem;
     display: flex;
@@ -36,7 +39,8 @@
 }
 #main > #allEvaluations > #header > #tags,
 #main > #allStudents > #header > #tags,
-#main > #registrationQueue > #header > #tags {
+#main > #registrationQueue > #header > #tags,
+#main > #systemLogs > #header > #tags {
     width: 100%;
     gap: 4rem;
     display: flex;
@@ -46,7 +50,8 @@
 }
 #main > #allEvaluations > #students,
 #main > #allStudents > #students,
-#main > #registrationQueue > #students {
+#main > #registrationQueue > #students,
+#main > #systemLogs > #students {
     width: 100%;
     gap: 4rem;
     display: flex;
@@ -61,4 +66,27 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+}
+
+#main > #systemLogs > table {
+    max-width: 100%;
+    border-spacing: 0;
+    border: solid 0.2rem var(--color-secondary);
+    background-color: var(--color-shade-light);
+    display: fixed;
+}
+#main > #systemLogs > table th {
+    background-color: var(--color-secondary);
+    color: var(--color-shade-light);
+}
+#main > #systemLogs > table th,
+#main > #systemLogs > table td {
+    padding: 2rem;
+    border: solid 0.2rem var(--color-secondary);
+}
+#main > #systemLogs > table pre {
+    max-width: 100%;
+    overflow-x: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
