@@ -299,9 +299,32 @@ profileAndEvaluationsButton.addEventListener('click', () => {
             const response = JSON.parse(res);
             displayStudent(response.payload, [
                 {
-                    name: 'edit',
-                    label: 'Edit Profile',
-                    callback: (student, buttonElement) => { }
+                    name: 'requestEdit',
+                    label: 'Request Edit',
+                    callback: (student, buttonElement) => {
+                        buttonElement.disabled = true;
+                        fetch('/api/profileAndEvaluations/requestEdit.php', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                studentNumber: student.studentNumber
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(response => response.blob())
+                            .then(blob => {
+                                buttonElement.disabled = false;
+                                const url = window.URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.target = '_blank';
+                                a.download = 'Request Profile Edit Form.pdf';
+                                document.body.appendChild(a);
+                                a.click();
+                                a.remove();
+                                alertUser('Success', 'Request edit downloaded.<br>Please print and fill up the form.', 'success');
+                            });
+                    }
                 },
                 {
                     name: 'changePassword',
@@ -753,7 +776,7 @@ yourEvaluationsButton.addEventListener('click', () => {
             const response = JSON.parse(res);
             if (response.status == 'success') {
                 if (response.payload.length == 0) {
-                    alertUser('404', 'No evaluations more found.', 'alert');
+                    alertUser('404', 'No more evaluations found.', 'alert');
                     return;
                 };
                 for (const evaluation of response.payload) {
@@ -815,7 +838,7 @@ window.addEventListener('scroll', async (e) => {
                         const response = JSON.parse(res);
                         if (response.status == 'success') {
                             if (response.payload.length == 0) {
-                                alertUser('404', 'No evaluations more found.', 'alert');
+                                alertUser('404', 'No more evaluations found.', 'alert');
                                 return;
                             };
                             for (const evaluation of response.payload) {

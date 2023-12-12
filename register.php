@@ -165,7 +165,7 @@ $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
                         <input required type="date" name="birthday" id="birthday" placeholder="01/01/2020">
                     </div>
 
-                    <div class="textInput">
+                    <div class="textInput fileInput">
                         <label for="profilePicture">
                             <h6>Profile Picture</h6>
                         </label>

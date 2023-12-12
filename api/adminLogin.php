@@ -36,28 +36,33 @@ if ($adminID == null || $adminKey == null) {
     exit();
 };
 
-$query = "SELECT * FROM admins WHERE adminID = '$adminID' AND adminKey = '$adminKey'";
-if ($result = mysqli_query($databaseConnection, $query)) {
-    $row = mysqli_fetch_assoc($result);
-    if ($row) {
-        $jsonEncoded = json_encode($row);
-        echo <<<EOT
-            {
-                "message": "Login Successful",
-                "status": "success",
-                "payload": $jsonEncoded,
-                "code": 200
-            }
-        EOT;
-    } else {
-        echo <<<EOT
-            {
-                "message": "Invalid Credentials",
-                "status": "unauthorized",
-                "code": 401
-            }
-        EOT;
-    };
+$query = "SELECT * FROM admins WHERE adminID = '$adminID'";
+$result = mysqli_query($databaseConnection, $query);
+
+if (mysqli_num_rows($result) == 0) {
+    echo <<<EOT
+        {
+            "message": "Invalid Credentials",
+            "status": "unauthorized",
+            "code": 401
+        }
+    EOT;
+    exit();
+};
+
+$admin = mysqli_fetch_assoc($result);
+
+if (password_verify($adminKey, $admin['adminKey'])) {
+    $payload = json_encode($admin);
+    echo <<<EOT
+        {
+            "message": "Login Successful",
+            "status": "success",
+            "code": 200,
+            "payload": $payload
+        }
+    EOT;
+    exit();
 } else {
     echo <<<EOT
         {
@@ -66,4 +71,5 @@ if ($result = mysqli_query($databaseConnection, $query)) {
             "code": 401
         }
     EOT;
+    exit();
 };

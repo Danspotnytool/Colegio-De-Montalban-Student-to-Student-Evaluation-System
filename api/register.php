@@ -65,21 +65,21 @@ function sendEmail($receiver, $subject, $body)
 
 $body = trim(file_get_contents('php://input'));
 
-$admin = json_decode($body);
+$requestBody = json_decode($body);
 
-$firstName = $admin->firstName;
-$middleName = $admin->middleName;
-$lastName = $admin->lastName;
+$firstName = $requestBody->firstName;
+$middleName = $requestBody->middleName;
+$lastName = $requestBody->lastName;
 $fullName = "$firstName $lastName";
-$studentNumber = $admin->studentNumber;
-$gender = $admin->gender;
-$birthday = $admin->birthday;
-$profilePicture = $admin->profilePicture;
-$course = $admin->course;
-$year = $admin->year;
-$section = $admin->section;
-$emailAddress = $admin->emailAddress;
-$password = $admin->password;
+$studentNumber = $requestBody->studentNumber;
+$gender = $requestBody->gender;
+$birthday = $requestBody->birthday;
+$profilePicture = $requestBody->profilePicture;
+$course = $requestBody->course;
+$year = $requestBody->year;
+$section = $requestBody->section;
+$emailAddress = $requestBody->emailAddress;
+$password = $requestBody->password;
 
 // Check if student number is already taken from the database table "students" and "registrants"
 $checkStudentNumberQuery = "SELECT * FROM students WHERE studentNumber = '$studentNumber'";

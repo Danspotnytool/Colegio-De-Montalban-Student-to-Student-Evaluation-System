@@ -135,7 +135,7 @@ p.postscript {
 	width: 100%;
 	padding: 1rem 2rem;
 	border: solid 0.2rem var(--color-secondary);
-	border-radius: 1rem;
+	border-radius: 0.8rem;
 	outline: unset;
 	display: inline-flex;
 	font-size: 1.75rem;
@@ -155,14 +155,105 @@ p.postscript {
 	border: solid 0.2rem var(--color-primary);
 }
 
+input[type='date']::-webkit-calendar-picker-indicator {
+	display: none;
+	position: absolute;
+}
+
+.dropdown {
+	width: 100%;
+	max-width: 38rem;
+	gap: 1rem;
+	padding-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	position: relative;
+}
+.dropdown > svg {
+	content: "";
+	height: 1.5rem;
+	width: 2rem;
+	top: calc(100% - 2.6rem);
+	right: 2rem;
+	background-color: var(--color-shade-light);
+	display: block;
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+	transition: var(--transition-speed);
+}
+.dropdown > select:focus  + svg{
+	transform: rotateX(180deg);
+}
+.dropdown label,
+.dropdown label h6  {
+	text-align: left;
+}
+.dropdown select {
+	appearance: none;
+	-webkit-appearance: none;
+	padding: 1rem 2rem;
+	border: solid 0.2rem var(--color-secondary);
+	border-radius: 0.8rem;
+	outline: unset;
+	font-size: 1.5rem;
+	background-color: var(--color-shade-light);
+	transition: var(--transition-speed);
+}
+.dropdown select:focus {
+	border: solid 0.2rem var(--color-primary);
+}
+
+.fileInput > #profilePicture {
+	width: unset;
+	display: unset;
+}
+.fileInput > #profilePicture::before {
+	content: attr(placeholder);
+	top: 0;
+	right: 1rem;
+	padding: 1rem;
+	background-color: var(--color-shade-light);
+	border-radius: 10rem;
+	font-size: 1.5rem;
+	position: absolute;
+	z-index: 2;
+}
+.fileInput > #profilePicture::after {
+	content: '';
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	padding: 1rem;
+	background-color: var(--color-shade-light);
+	border-radius: 10rem;
+	font-size: 1.5rem;
+	position: absolute;
+	z-index: 1;
+}
+.fileInput > #profilePicture + svg {
+	height: 2rem;
+	width: 2rem;
+	top: calc(100% - 3.25rem);
+	left: 2rem;
+	position: absolute;
+	z-index: 3;
+	pointer-events: none;
+}
+
 .button {
 	min-height: 4rem;
 	padding: 1rem 4rem;
 	border: unset;
-	border-radius: 1rem;
+	border-radius: 0.8rem;
 	color: var(--color-shade-light) !important;
 	text-decoration: none;
 	display: inline-flex;
+	justify-content: center;
+	align-items: center;
 	position: relative;
 	cursor: pointer;
 	overflow: hidden;
@@ -220,59 +311,6 @@ p.postscript {
 	transform: translateX(0) translateY(0) scale(200%) rotate(360deg);
 }
 
-input[type='date']::-webkit-calendar-picker-indicator {
-	display: none;
-	position: absolute;
-}
-
-.dropdown {
-	width: 100%;
-	max-width: 38rem;
-	gap: 1rem;
-	padding-top: 1rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: stretch;
-	position: relative;
-}
-.dropdown > svg {
-	content: "";
-	height: 1.5rem;
-	width: 2rem;
-	top: calc(100% - 2.6rem);
-	right: 2rem;
-	background-color: var(--color-shade-light);
-	display: block;
-	position: absolute;
-	z-index: 1;
-	pointer-events: none;
-	transition: var(--transition-speed);
-}
-.dropdown > select:focus  + svg{
-	transform: rotateX(180deg);
-}
-.dropdown label,
-.dropdown label h6  {
-	text-align: left;
-}
-.dropdown select {
-	appearance: none;
-	-webkit-appearance: none;
-	padding: 1rem 2rem;
-	border: solid 0.2rem var(--color-secondary);
-	border-radius: 1rem;
-	outline: unset;
-	font-size: 1.5rem;
-	background-color: var(--color-shade-light);
-	transition: var(--transition-speed);
-}
-.dropdown select:focus {
-	border: solid 0.2rem var(--color-primary);
-}
-
-
-
 .alertCardBackground {
 	height: 100%;
 	width: 100%;
@@ -292,7 +330,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 	transform: translate(-50%, -50%);
 	gap: 2rem;
 	border: solid 0.2rem var(--color-secondary);
-	border-radius: 1rem;
+	border-radius: 0.8rem;
 	color: var(--color-shade-dark);
 	background-color: var(--color-shade-light);
 	display: flex;

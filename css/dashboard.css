@@ -157,7 +157,7 @@ html {
     padding: 4rem;
     gap: 4rem;
     border: solid 0.2rem var(--color-secondary);
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     background-color: var(--color-shade-light);
     display: flex;
     flex-direction: column;
@@ -186,6 +186,7 @@ html {
         align-items: center;
     };
 }
+#main .studentInfo > #profile > #profileContainer > img,
 #main .studentInfo > #profile > img {
     height: 24rem;
     width: 24rem;
@@ -208,6 +209,14 @@ html {
     justify-content: space-between;
     align-items: center;
 }
+@media screen and (max-width: 50rem) {
+    #main .studentInfo > #profile > #form > .row:has(* > #course) {
+        flex-direction: column;
+    }
+    #main .studentInfo > #profile > #form > .row:has(* > #course) > .dropdown {
+        max-width: unset;
+    }
+}
 #main .studentInfo > #action {
     width: 100%;
     gap: 1rem;
@@ -215,6 +224,18 @@ html {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+@media screen and (max-width: 50rem) {
+    #main .studentInfo > #action {
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        text-align: center
+    };
+    #main .studentInfo > #action > .button {
+        width: 100%;
+        display: flex;
+    };
 }
 
 #main > #profileAndEvaluations > #evaluations {
@@ -230,7 +251,7 @@ html {
 #main .evaluation {
     width: 100%;
     border: solid 0.2rem var(--color-secondary);
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     background-color: var(--color-shade-light);
     display: flex;
     flex-direction: column;
@@ -363,7 +384,7 @@ html {
 #main > #yourEvaluations > #evaluations > #student {
     width: 100%;
     padding: 1rem 4rem;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     color: var(--color-shade-light);
     background-color: var(--color-secondary);
     display: flex;
@@ -451,7 +472,7 @@ html {
     width: 100%;
     padding: 2rem;
     gap: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     background-color: var(--color-shade-light);
     display: flex;
     flex-direction: row;
@@ -498,7 +519,7 @@ html {
     width: 100%;
     padding: 1rem 2rem;
     gap: 2rem;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     color: var(--color-shade-light);
     background-color: var(--color-secondary);
     display: flex;
@@ -544,7 +565,7 @@ html {
     width: 100%;
     padding: 4rem 2rem;
     gap: 2rem;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     background-color: var(--color-shade-light);
     text-align: center;
     display: flex;
@@ -569,7 +590,7 @@ html {
     width: 100%;
     padding: 2rem 4rem;
     gap: 4rem;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
