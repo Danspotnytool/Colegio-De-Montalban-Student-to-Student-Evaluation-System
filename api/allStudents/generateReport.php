@@ -612,3 +612,40 @@ $dompdf->stream('form.pdf', [
     'compress' => true,
     'Attachment' => false,
 ]);
+
+
+
+// System logs
+$time = time();
+$path = $_SERVER['REQUEST_URI'];
+$HTTP_X_FORWARDED_FOR = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+$HTTP_CLIENT_IP = $_SERVER['REMOTE_ADDR'] ?? '';
+$USER_AGENT = $_SERVER['HTTP_USER_AGENT'] ?? '';
+$admin = mysqli_fetch_assoc($admin);
+$content = <<<EOT
+    {
+        "time": $time,
+        "type": "report",
+        "by": "admin",
+        "payload": {
+            "path": "$path",
+            "ip": {
+                "HTTP_X_FORWARDED_FOR": "$HTTP_X_FORWARDED_FOR",
+                "HTTP_CLIENT_IP": "$HTTP_CLIENT_IP"
+            },
+            "userAgent": "$USER_AGENT",
+            "adminID": "$admin[adminID]"
+        }
+    }
+EOT;
+
+$content = json_decode($content, true);
+
+$content = json_encode($content);
+
+$id = $time . '-' . uniqid();
+
+// Insert the system logs to the database
+$query = "INSERT INTO system_logs (id, timeAdded, content) VALUES ('$id', '$time', '$content')";
+mysqli_query($databaseConnection, $query);
+exit();

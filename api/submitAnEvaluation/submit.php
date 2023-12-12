@@ -72,8 +72,8 @@ $token = $_COOKIE['token'];
 // Get the student from the database
 $query = "SELECT * FROM students WHERE token = '$token'";
 $result = mysqli_query($databaseConnection, $query);
-$sender = mysqli_fetch_assoc($result);
-if (!$sender) {
+$student = mysqli_fetch_assoc($result);
+if (!$student) {
     echo <<<EOT
         {
             "message": "Invalid token",
@@ -157,14 +157,14 @@ $reciever = mysqli_fetch_assoc($result);
 
 
 // Create the evaluation in the database
-$evaluationID = $sender['studentNumber'] . "-" . uniqid() . "-" . $reciever['studentNumber'];
+$evaluationID = $student['studentNumber'] . "-" . uniqid() . "-" . $reciever['studentNumber'];
 $time = time();
 $evaluation = json_encode($evaluation);
 $additionalStatement = $requestBody['additionalStatement'];
 // Get sender and reciever name
-$query = "SELECT fullName, studentNumber FROM students WHERE studentNumber = '$sender[studentNumber]'";
+$query = "SELECT fullName, studentNumber FROM students WHERE studentNumber = '$student[studentNumber]'";
 $result = mysqli_query($databaseConnection, $query);
-$sender = mysqli_fetch_assoc($result);
+$student = mysqli_fetch_assoc($result);
 $query = "SELECT fullName, studentNumber, email FROM students WHERE studentNumber = '$reciever[studentNumber]'";
 $result = mysqli_query($databaseConnection, $query);
 $reciever = mysqli_fetch_assoc($result);
@@ -172,9 +172,9 @@ $reciever = mysqli_fetch_assoc($result);
 $evaluationItem = <<<EOT
     {
         "evaluationID": "$evaluationID",
-        "senderStudentNumber": "$sender[studentNumber]",
+        "senderStudentNumber": "$student[studentNumber]",
         "receiverStudentNumber": "$reciever[studentNumber]",
-        "senderName": "$sender[fullName]",
+        "senderName": "$student[fullName]",
         "receiverName": "$reciever[fullName]",
         "contents": $evaluation,
         "additionalStatement": "$additionalStatement",
@@ -183,7 +183,7 @@ $evaluationItem = <<<EOT
 EOT;
 
 $query = "INSERT INTO evaluations (evaluationID, senderStudentNumber, receiverStudentNumber, senderName, receiverName, contents, additionalStatement, timeAdded)
-    VALUES ('$evaluationID', '$sender[studentNumber]', '$reciever[studentNumber]', '$sender[fullName]', '$reciever[fullName]', '$evaluation', '$additionalStatement', '$time')";
+    VALUES ('$evaluationID', '$student[studentNumber]', '$reciever[studentNumber]', '$student[fullName]', '$reciever[fullName]', '$evaluation', '$additionalStatement', '$time')";
 $result = mysqli_query($databaseConnection, $query);
 
 if (!$result) {
@@ -228,3 +228,40 @@ echo <<<EOT
         "evaluation": $evaluationItem
     }
 EOT;
+
+
+
+// System logs
+$time = time();
+$path = $_SERVER['REQUEST_URI'];
+$HTTP_X_FORWARDED_FOR = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+$HTTP_CLIENT_IP = $_SERVER['REMOTE_ADDR'] ?? '';
+$USER_AGENT = $_SERVER['HTTP_USER_AGENT'] ?? '';
+$studentNumber = $student['studentNumber'];
+$content = <<<EOT
+    {
+        "time": $time,
+        "type": "submit",
+        "by": "student",
+        "payload": {
+            "path": "$path",
+            "ip": {
+                "HTTP_X_FORWARDED_FOR": "$HTTP_X_FORWARDED_FOR",
+                "HTTP_CLIENT_IP": "$HTTP_CLIENT_IP"
+            },
+            "userAgent": "$USER_AGENT",
+            "studentNumber": "$studentNumber"
+        }
+    }
+EOT;
+
+$content = json_decode($content, true);
+
+$content = json_encode($content);
+
+$id = $time . '-' . uniqid();
+
+// Insert the system logs to the database
+$query = "INSERT INTO system_logs (id, timeAdded, content) VALUES ('$id', '$time', '$content')";
+mysqli_query($databaseConnection, $query);
+exit();

@@ -54,16 +54,18 @@
  * @typedef {{
  *      id: String,
  *      timeAdded: String,
+ *      by: 'student' | 'admin',
  *      content: {
  *          time: String,
- *          type: 'visit' | 'redirect',
+ *          type: 'visit' | 'redirect' | 'retrieve' | 'search' | 'edit' | 'summon' | 'ask' | 'report' | 'accept' | 'reject' | 'submit',
  *          payload:{
  *              path: String,
  *              ip:{
  *                  HTTP_X_FORWARDED_FOR: String,
  *                  HTTP_CLIENT_IP: String
  *              },
- *              userAgent: String
+ *              userAgent: String,
+ *              studentNumber: String
  *          }
  *      }
  * }} SystemLogs
