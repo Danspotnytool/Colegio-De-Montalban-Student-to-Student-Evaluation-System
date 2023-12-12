@@ -260,7 +260,7 @@ $html = <<<EOF
             <td>
                 <div class="textInput">
                     <label for="course">
-                        <h3>Course<span style="opacity: 0;">________________________</span></h3>
+                        <h3><span style="opacity: 0;">____________</span>Course<span style="opacity: 0;">____________</span></h3>
                     </label>
                     <div></div>
                 </div>
