@@ -115,7 +115,7 @@ const displayStudent = (student, buttons) => {
                     <label for="middleName">
                         <h6>Middle Name</h6>
                     </label>
-                    <input type="text" name="middleName" id="middleName" value="${student.middleName}">
+                    <input readonly type="text" name="middleName" id="middleName" value="${student.middleName}">
                 </div>
 
                 <div class="textInput">
@@ -329,13 +329,39 @@ profileAndEvaluationsButton.addEventListener('click', () => {
                 {
                     name: 'changePassword',
                     label: 'Change Password',
-                    callback: (student, buttonElement) => { }
+                    callback: (student, buttonElement) => {
+                        window.location.href = '/passwordReset.php';
+                    }
                 },
                 {
-                    name: 'generateStatisticalReport',
+                    id: 'generateStatisticalReport',
                     label: 'Generate Statistical Report',
-                    callback: (student, buttonElement) => { }
-                }
+                    callback: (student, buttonElement) => {
+                        buttonElement.disabled = true;
+
+                        fetch('./api/proFileAndEvaluations/generateReport.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                studentNumber: student.studentNumber
+                            })
+                        }).then(response => response.blob())
+                            .then(blob => {
+                                buttonElement.disabled = false;
+                                const url = window.URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.target = '_blank';
+                                a.download = `${student.firstName} ${student.lastName} (${student.studentNumber})- Statistical Report.pdf`
+                                document.body.appendChild(a);
+                                a.click();
+                                a.remove();
+                                alertUser('Success', 'Report generated successfully.', 'success');
+                            });
+                    }
+                },
             ]);
         });
 

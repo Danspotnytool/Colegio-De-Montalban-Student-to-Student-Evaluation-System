@@ -39,9 +39,11 @@ if ($search == '') {
 
 // Get the user id from the token
 $query = "SELECT * FROM students WHERE token = '$token'";
-$admin = mysqli_query($databaseConnection, $query);
+$student = mysqli_query($databaseConnection, $query);
+$student = mysqli_fetch_assoc($student);
+$studentNumber = $student['studentNumber'];
 
-if (!$admin) {
+if (!$student) {
     echo <<<EOT
         {
             "message": "You are not authorized to access this resource",
@@ -76,7 +78,7 @@ OR  year LIKE '$year'
 OR  section LIKE '$search'
 OR  section LIKE '$section'
 OR  email LIKE '$search'
-)";
+) AND NOT studentNumber = '$studentNumber'";
 $students = mysqli_query($databaseConnection, $query);
 
 if (!$students) {

@@ -95,18 +95,14 @@ $studentNumber = $sender['studentNumber'];
 
 
 // CDM Logo
-$path = "../../assets/CDM Logo.png";
-$type = pathinfo($path, PATHINFO_EXTENSION);
-$data = file_get_contents($path);
-$CDMLogo = "data:image/" . $type . ";base64," . base64_encode($data);
+$path = "../../assets/CDM Logo.base64";
+$CDMLogo = file_get_contents($path);
 // ICS Logo
-$path = "../../assets/ICS Logo.png";
-$type = pathinfo($path, PATHINFO_EXTENSION);
-$data = file_get_contents($path);
-$ICSLogo = "data:image/" . $type . ";base64," . base64_encode($data);
+$path = "../../assets/ICS Logo.base64";
+$ICSLogo = file_get_contents($path);
 
 // Create the PDF
-$html = <<<HTML
+$html = <<<EOF
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,12 +115,8 @@ $html = <<<HTML
     <link rel="stylesheet" href="../../css/index.css">
 
     <style>
-        h1 {
-            text-align: center;
-        }
-        
         * {
-            line-height: 1;
+            line-height: 0.5;
             text-align: center;
         }
 
@@ -178,15 +170,17 @@ $html = <<<HTML
 <body>
     <table>
         <tr>
-            <td>
+            <td style="text-align: left;">
                 <img src="$CDMLogo" alt="">
             </td>
 
             <td>
-                <h2>Colegio De Montalban<br>Student to Student<br>Evaluation System</h2>
+                <h3>Colegio De Montalban</h3>
+                <h3>Student to Student</h3>
+                <h3>Evaluation System</h3>
             </td>
 
-            <td>
+            <td style="text-align: right;">
                 <img src="$ICSLogo" alt="">
             </td>
         </tr>
@@ -232,9 +226,7 @@ $html = <<<HTML
         <label for="studentNumber">
             <h3>Student Number</h3>
         </label>
-        <div>
-            $studentNumber
-        </div>
+        <div></div>
     </div>
 
 
@@ -324,7 +316,7 @@ $html = <<<HTML
 </body>
 
 </html>
-HTML;
+EOF;
 
 $tmp = sys_get_temp_dir();
 

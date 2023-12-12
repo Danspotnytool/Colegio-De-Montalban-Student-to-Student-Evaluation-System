@@ -51,7 +51,7 @@ if (
         mysqli_num_rows($result) > 0
     ) {
         // Redirect the user to the dashboard
-        header('Location: /dashboard.php');
+        // header('Location: /dashboard.php');
         $content['payload']['token'] = $token;
         $content['type'] = 'redirect';
         $content['payload']['redirect'] = '/dashboard.php';
@@ -120,7 +120,7 @@ $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
                     <input required type="email" name="emailAddress" id="emailAddress" placeholder="example@gmail.com">
                 </div>
 
-                <button type="submit" class="button">
+                <button type="submit" class="button" id="reset">
                     <p><b>Reset</b></p>
                 </button>
             </form>
