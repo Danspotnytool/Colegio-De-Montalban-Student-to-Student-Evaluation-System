@@ -240,8 +240,8 @@ const displayEvaluation = (evaluation, parent) => {
             if (evaluation.receiverName) {
                 return `
                     <div class="users">
-                        <h6><span style="font-family: unset;">From:</span> <span style="font-family: unset;">${evaluation.senderName} [${evaluation.senderStudentNumber}]</span></h6>
-                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} [${evaluation.receiverStudentNumber}]</span></h6>
+                        <h6><span style="font-family: unset;">From:</span> <span style="font-family: unset;">${evaluation.senderName} (${evaluation.senderStudentNumber})</span></h6>
+                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} (${evaluation.receiverStudentNumber})</span></h6>
                     </div>
                 `;
             };
@@ -318,7 +318,7 @@ allEvaluationsButton.addEventListener('click', () => {
 
 
     document.getElementById('search').addEventListener('click', () => {
-        fetch(`./api/allEvaluations/search.php?search=${document.getElementById('student').value}`, {
+        fetch(`/api/allEvaluations/search.php?search=${document.getElementById('student').value}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -406,7 +406,7 @@ allStudentsButton.addEventListener('click', () => {
 
     document.getElementById('search').addEventListener('click', () => {
         document.getElementById('search').disabled = false;
-        fetch(`./api/allStudents/search.php?search=${document.getElementById('student').value}`, {
+        fetch(`/api/allStudents/search.php?search=${document.getElementById('student').value}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -619,7 +619,7 @@ allStudentsButton.addEventListener('click', () => {
 
 
 
-                                        fetch('./api/allStudents/edit.php', {
+                                        fetch('/api/allStudents/edit.php', {
                                             method: 'UPDATE',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -743,7 +743,7 @@ allStudentsButton.addEventListener('click', () => {
 
 
 
-    fetch('./api/allStudents/retrieve.php', {
+    fetch('/api/allStudents/retrieve.php', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -762,7 +762,7 @@ allStudentsButton.addEventListener('click', () => {
                         label: 'Summon',
                         callback: (student, buttonElement) => {
                             buttonElement.disabled = true;
-                            fetch('./api/allStudents/summon.php', {
+                            fetch('/api/allStudents/summon.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -976,7 +976,7 @@ allStudentsButton.addEventListener('click', () => {
 
 
 
-                                fetch('./api/allStudents/edit.php', {
+                                fetch('/api/allStudents/edit.php', {
                                     method: 'UPDATE',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -1090,7 +1090,7 @@ allStudentsButton.addEventListener('click', () => {
                         callback: (student, buttonElement) => {
                             buttonElement.disabled = true;
 
-                            fetch('./api/allStudents/generateReport.php', {
+                            fetch('/api/allStudents/generateReport.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -1151,7 +1151,7 @@ registrationQueueButton.addEventListener('click', () => {
 
 
     document.getElementById('search').addEventListener('click', () => {
-        fetch(`./api/registrationQueue/search.php?search=${document.getElementById('student').value}`, {
+        fetch(`/api/registrationQueue/search.php?search=${document.getElementById('student').value}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -1174,7 +1174,7 @@ registrationQueueButton.addEventListener('click', () => {
                                 id: 'accept',
                                 label: 'Accept',
                                 callback: (student) => {
-                                    fetch('./api/registrationQueue/accept.php', {
+                                    fetch('/api/registrationQueue/accept.php', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -1204,7 +1204,7 @@ registrationQueueButton.addEventListener('click', () => {
                                 id: 'askForMoreInformation',
                                 label: 'Ask for more information',
                                 callback: (student, buttonElement) => {
-                                    fetch('./api/registrationQueue/ask.php', {
+                                    fetch('/api/registrationQueue/ask.php', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -1417,7 +1417,7 @@ registrationQueueButton.addEventListener('click', () => {
 
 
 
-                                        fetch('./api/registrationQueue/edit.php', {
+                                        fetch('/api/registrationQueue/edit.php', {
                                             method: 'UPDATE',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -1531,7 +1531,7 @@ registrationQueueButton.addEventListener('click', () => {
                                 callback: (student) => {
                                     console.log(student);
 
-                                    fetch('./api/registrationQueue/reject.php', {
+                                    fetch('/api/registrationQueue/reject.php', {
                                         method: 'DELETE',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -1568,7 +1568,7 @@ registrationQueueButton.addEventListener('click', () => {
 
 
 
-    fetch('./api/registrationQueue/retrieve.php', {
+    fetch('/api/registrationQueue/retrieve.php', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -1586,7 +1586,7 @@ registrationQueueButton.addEventListener('click', () => {
                         id: 'accept',
                         label: 'Accept',
                         callback: (student) => {
-                            fetch('./api/registrationQueue/accept.php', {
+                            fetch('/api/registrationQueue/accept.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -1616,7 +1616,7 @@ registrationQueueButton.addEventListener('click', () => {
                         id: 'askForMoreInformation',
                         label: 'Ask for more Information',
                         callback: (student, buttonElement) => {
-                            fetch('./api/registrationQueue/ask.php', {
+                            fetch('/api/registrationQueue/ask.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -1829,7 +1829,7 @@ registrationQueueButton.addEventListener('click', () => {
 
 
 
-                                fetch('./api/registrationQueue/edit.php', {
+                                fetch('/api/registrationQueue/edit.php', {
                                     method: 'UPDATE',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -1943,7 +1943,7 @@ registrationQueueButton.addEventListener('click', () => {
                         callback: (student) => {
                             console.log(student);
 
-                            fetch('./api/registrationQueue/reject.php', {
+                            fetch('/api/registrationQueue/reject.php', {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -1983,6 +1983,9 @@ systemLogsButton.addEventListener('click', () => {
 
 
 pagesButton(true);
+if (window.matchMedia('(max-width: 50rem)').matches) {
+    document.querySelector('#sidebarButton').click();
+};
 
 
 
@@ -1992,7 +1995,7 @@ window.addEventListener('scroll', async (e) => {
         // Check which page is active
         switch (window.location.hash.substring(1)) {
             case 'allEvaluations':
-                fetch(`./api/allEvaluations/retrieve.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
+                fetch(`/api/allEvaluations/retrieve.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -2021,7 +2024,7 @@ window.addEventListener('scroll', async (e) => {
                     });
                 break;
             case 'allStudents':
-                fetch(`./api/allStudents/retrieve.php?start=${studentsList[studentsList.length - 1].timeAdded}`, {
+                fetch(`/api/allStudents/retrieve.php?start=${studentsList[studentsList.length - 1].timeAdded}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -2040,7 +2043,7 @@ window.addEventListener('scroll', async (e) => {
                                     label: 'Summon',
                                     callback: (student, buttonElement) => {
                                         buttonElement.disabled = true;
-                                        fetch('./api/allStudents/summon.php', {
+                                        fetch('/api/allStudents/summon.php', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -2254,7 +2257,7 @@ window.addEventListener('scroll', async (e) => {
 
 
 
-                                            fetch('./api/allStudents/edit.php', {
+                                            fetch('/api/allStudents/edit.php', {
                                                 method: 'UPDATE',
                                                 headers: {
                                                     'Content-Type': 'application/json'
@@ -2368,7 +2371,7 @@ window.addEventListener('scroll', async (e) => {
                                     callback: (student, buttonElement) => {
                                         buttonElement.disabled = true;
 
-                                        fetch('./api/allStudents/generateReport.php', {
+                                        fetch('/api/allStudents/generateReport.php', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -2399,7 +2402,7 @@ window.addEventListener('scroll', async (e) => {
                     });
                 break;
             case 'registrationQueue':
-                fetch(`./api/registrationQueue/retrieve.php?start=${studentsList[studentsList.length - 1].timeAdded}&search=${document.getElementById('student').value}`, {
+                fetch(`/api/registrationQueue/retrieve.php?start=${studentsList[studentsList.length - 1].timeAdded}&search=${document.getElementById('student').value}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -2416,7 +2419,7 @@ window.addEventListener('scroll', async (e) => {
                                     id: 'accept',
                                     label: 'Accept',
                                     callback: (student) => {
-                                        fetch('./api/registrationQueue/accept.php', {
+                                        fetch('/api/registrationQueue/accept.php', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -2446,7 +2449,7 @@ window.addEventListener('scroll', async (e) => {
                                     id: 'askForMoreInformation',
                                     label: 'Ask for more Information',
                                     callback: (student, buttonElement) => {
-                                        fetch('./api/registrationQueue/ask.php', {
+                                        fetch('/api/registrationQueue/ask.php', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -2484,7 +2487,7 @@ window.addEventListener('scroll', async (e) => {
                                     callback: (student) => {
                                         console.log(student);
 
-                                        fetch('./api/registrationQueue/reject.php', {
+                                        fetch('/api/registrationQueue/reject.php', {
                                             method: 'DELETE',
                                             headers: {
                                                 'Content-Type': 'application/json'

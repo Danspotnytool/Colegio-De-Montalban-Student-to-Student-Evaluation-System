@@ -60,7 +60,7 @@ body::after {
 	#loginPanel {
 		min-height: 100%;
 		width: 100%;
-		padding: 8rem 8rem;
+		padding: 8rem 4rem;
 		gap: 4rem;
 		border: unset;
 		justify-content: flex-start;

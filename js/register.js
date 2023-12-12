@@ -2,16 +2,15 @@
 const registerForm = document.getElementById('registerForm');
 const registerButton = document.getElementById('register');
 
-registerButton.addEventListener('click', (e) => {
+reset.addEventListener('click', (e) => {
     e.preventDefault();
     const warning = document.getElementById('warning');
     if (warning) {
         warning.remove();
     };
-    // registerButton.disabled = true;
+    reset.disabled = true;
 
     const formData = new FormData(registerForm);
-    const data = Object.fromEntries(formData);
 
     const postscript = document.createElement('p');
     postscript.classList.add('postscript');
@@ -130,7 +129,7 @@ registerButton.addEventListener('click', (e) => {
 
     // Validate year and section
     // Example: 1A
-    const yearAndSectionRegex = /^[1-4][A-Z]$/;
+    const yearAndSectionRegex = /^[1-4][a-zA-Z]$/;
     if (!yearAndSectionRegex.test(yearAndSection.value)) {
         console.log('a');
         postscript.textContent = 'Invalid year and section';
@@ -228,7 +227,7 @@ registerButton.addEventListener('click', (e) => {
             .then(response => response.text())
             .then((res) => {
                 console.log(res);
-                registerButton.disabled = false;
+                reset.disabled = false;
                 /** @type {import("../utils/types.js").Response} */
                 const response = JSON.parse(res);
                 if (response.code === 200) {
@@ -253,4 +252,69 @@ profilePicture.addEventListener('change', () => {
     /** @type {String} */
     const filename = profilePicture.value.split('\\')[profilePicture.value.split('\\').length - 1];
     profilePicture.placeholder = `${filename.substring(0, 10)}...`;
+});
+
+
+
+const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirmPassword');
+
+password.addEventListener('keyup', (e) => {
+    const warning = document.getElementById('warning');
+    if (warning) {
+        warning.remove();
+    };
+    const value = e.target.value;
+
+    let postscriptContent = '';
+
+    const postscript = document.createElement('p');
+    postscript.classList.add('postscript');
+    postscript.id = 'warning';
+
+    // Validate password
+    // Password must be at least 8 characters long
+    const passwordRegex1 = /^.{8,}$/;
+    if (!passwordRegex1.test(value)) {
+        postscriptContent += 'Password must be at least 8 characters long<br>';
+    };
+    // Password must contain at least one uppercase letter
+    const passwordRegex2 = /[A-Z]/;
+    if (!passwordRegex2.test(value)) {
+        postscriptContent += 'Password must contain at least one uppercase letter<br>';
+    };
+    // Password must contain at least one lowercase letter
+    const passwordRegex3 = /[a-z]/;
+    if (!passwordRegex3.test(value)) {
+        postscriptContent += 'Password must contain at least one lowercase letter<br>';
+    };
+    // Password must contain at least one number
+    const passwordRegex4 = /[0-9]/;
+    if (!passwordRegex4.test(value)) {
+        postscriptContent += 'Password must contain at least one number<br>';
+    };
+    // Password must contain at least one special character
+    const passwordRegex5 = /[^a-zA-Z0-9]/;
+    if (!passwordRegex5.test(value)) {
+        postscriptContent += 'Password must contain at least one special character<br>';
+    };
+    postscript.innerHTML = postscriptContent;
+    registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+});
+
+confirmPassword.addEventListener('keyup', (e) => {
+    const warning = document.getElementById('warning');
+    if (warning) {
+        warning.remove();
+    };
+    const value = e.target.value;
+    if (value !== password.value) {
+        const postscript = document.createElement('p');
+        postscript.classList.add('postscript');
+        postscript.id = 'warning';
+
+        postscript.textContent = 'Passwords do not match';
+
+        registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+    };
 });

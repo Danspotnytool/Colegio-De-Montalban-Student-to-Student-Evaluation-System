@@ -50,7 +50,7 @@ if (in_array('start', $params)) {
 
 // Get the student's evaluations
 $studentNumber = $student['studentNumber'];
-$query = "SELECT * FROM evaluations WHERE senderStudentNumber = '$studentNumber' AND timeAdded > $start ORDER BY timeAdded ASC LIMIT 5";
+$query = "SELECT * FROM evaluations WHERE senderStudentNumber = '$studentNumber' AND timeAdded > $start ORDER BY timeAdded DESC LIMIT 5";
 $result = mysqli_query($databaseConnection, $query);
 
 $evaluations = array();

@@ -22,7 +22,7 @@
             <img src="./assets/CDM Logo.png" alt="CDM Logo">
             <div class="title">
                 <h3>Colegio de Montalban</h3>
-                <h5>Student to Student Evaluation System</h5>
+                <h5><span>Student to Student</span> <span>Evaluation System</span></h5>
             </div>
         </div>
         <div class="buttons">
@@ -42,7 +42,7 @@
         <div id="content">
             <div class="title">
                 <h1>Colegio de Montalban</h1>
-                <h3>Student to Student Evaluation System</h3>
+                <h3><span>Student to Student</span> <span>Evaluation System</span></h3>
             </div>
             <p>
                 Welcome to the cutting-edge "<b>Colegio de Montalban Student to Student Evaluation System</b>" – an
@@ -161,7 +161,7 @@
             <div class="developer">
                 <img src="./assets/Student Picture.png" alt="Student Picture">
                 <div class="info">
-                    <h3>John Ray Abao</h3>
+                    <h3>Jhon Ray Abao</h3>
                     <h5>System Analyst and Design</h5>
                 </div>
             </div>
@@ -176,14 +176,14 @@
             <div class="developer">
                 <img src="./assets/Student Picture.png" alt="Student Picture">
                 <div class="info">
-                    <h3>Carla May Agana</h3>
+                    <h3>Carla Mae Agana</h3>
                     <h5>System Analyst and Design</h5>
                 </div>
             </div>
             <div class="developer">
                 <img src="./assets/Student Picture.png" alt="Student Picture">
                 <div class="info">
-                    <h3>Rayjohn Torilla</h3>
+                    <h3>RyanJohn Torilla</h3>
                     <h5>System Analyst</h5>
                 </div>
             </div>

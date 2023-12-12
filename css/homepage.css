@@ -13,7 +13,15 @@ html {
 .title * {
     white-space: nowrap;
 }
-.title :first-child {
+@media screen and (max-width: 50rem) {
+    .title * {
+        white-space: unset;
+    }
+    .title span {
+        white-space: nowrap;
+    }
+}
+.title > :first-child {
     color: var(--color-primary-complement);
 }
 @media screen and (max-width: 50rem) {
@@ -155,8 +163,9 @@ html {
     }
 
     #banner > #students {
-        height: 60rem;
-        width: 60rem;
+        height: 56rem;
+        width: 56rem;
+        max-width: 100%;
         padding-top: 0;
         display: flex;
         justify-content: center;

@@ -60,7 +60,7 @@ if (!$admin) {
 
 // Get the evaluations
 // Add the row number to the query
-$query = "SELECT * FROM evaluations WHERE timeAdded > $start ORDER BY timeAdded ASC Limit 5";
+$query = "SELECT * FROM evaluations WHERE timeAdded > $start ORDER BY timeAdded DESC Limit 5";
 $result = mysqli_query($databaseConnection, $query);
 
 if (!$result) {

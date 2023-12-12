@@ -358,7 +358,7 @@ $subject = "CDM Student Evaluation - Registration";
 $body = <<<EOT
     <h1>CDM Student Evaluation</h1>
     <p>Hi $fullName,</p>
-    <p>Your registration details has been updated.</p>
+    <p>Your details has been updated.</p>
     <p>Thank you.</p>
     <p>CDM Student Evaluation</p>
 EOT;

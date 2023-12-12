@@ -224,7 +224,7 @@ const displayEvaluation = (evaluation, parent) => {
             if (evaluation.receiverStudentNumber) {
                 return `
                     <div class="users">
-                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} [${evaluation.receiverStudentNumber}]</span></h6>
+                        <h6><span style="font-family: unset;">To:</span> <span style="font-family: unset;">${evaluation.receiverName} (${evaluation.receiverStudentNumber})</span></h6>
                     </div>
                 `;
             } else {
@@ -339,7 +339,7 @@ profileAndEvaluationsButton.addEventListener('click', () => {
                     callback: (student, buttonElement) => {
                         buttonElement.disabled = true;
 
-                        fetch('./api/proFileAndEvaluations/generateReport.php', {
+                        fetch('/api/proFileAndEvaluations/generateReport.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -519,41 +519,41 @@ submitAnEvaluationButton.addEventListener('click', () => {
         {
             name: 'Punctuality',
             descriptions: [
+                'Consistently late',
                 'Occasionally late',
                 'Mostly on time',
                 'Consistently on time',
-                'Always early',
-                'Consistently late'
+                'Always early'
             ]
         },
         {
             name: 'Respect',
             descriptions: [
+                'Disrespectful',
                 'Occasionally Disrespectful',
                 'Generally Respectful',
                 'Very Respectful',
-                'Exemplary Respect',
-                'Disrespectful'
+                'Exemplary Respect'
             ]
         },
         {
             name: 'Cooperation',
             descriptions: [
+                'Uncooperative',
                 'Rarely Cooperative',
                 'Usually Cooperative',
                 'Very Cooperative',
-                'Exceptionally Cooperative',
-                'Uncooperative'
+                'Exceptionally Cooperative'
             ]
         },
         {
             name: 'Attentiveness',
             descriptions: [
+                'Distracted',
                 'Occasionally Distracted',
                 'Generally Attentivene',
                 'Very Attentive',
-                'Exceptionally Attentive',
-                'Distracted'
+                'Exceptionally Attentive'
             ]
         }
     ];
@@ -819,6 +819,9 @@ yourEvaluationsButton.addEventListener('click', () => {
 
 
 pagesButton(true);
+if (window.matchMedia('(max-width: 50rem)').matches) {
+    document.querySelector('#sidebarButton').click();
+};
 
 
 
@@ -828,7 +831,7 @@ window.addEventListener('scroll', async (e) => {
         // Check which page is active
         switch (window.location.hash.substring(1)) {
             case 'profileAndEvaluations':
-                fetch(`./api/profileAndEvaluations/evaluations.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
+                fetch(`/api/profileAndEvaluations/evaluations.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -852,7 +855,7 @@ window.addEventListener('scroll', async (e) => {
             case 'submitAnEvaluation':
                 break;
             case 'yourEvaluations':
-                fetch(`./api/yourEvaluations/retrieve.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
+                fetch(`/api/yourEvaluations/retrieve.php?start=${evaluationsList[evaluationsList.length - 1].timeAdded}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'

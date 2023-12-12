@@ -70,6 +70,36 @@ mysqli_query($databaseConnection, $query);
 
 $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
 
+
+
+// Get query parameters
+$urlQuery = $_GET;
+$params = array_keys($urlQuery);
+$search = '';
+if (in_array('search', $params)) {
+    $search = $urlQuery['search'];
+};
+$key = '';
+if (in_array('key', $params)) {
+    $key = $urlQuery['key'];
+};
+
+if ($key == '') {
+    header('Location: /passwordReset.php');
+    exit();
+};
+
+
+
+// Get student
+$query = "SELECT * FROM students WHERE resetPasswordKey = '$key'";
+$result = mysqli_query($databaseConnection, $query);
+$student = mysqli_fetch_assoc($result);
+
+if (!$student) {
+    header('Location: /passwordReset.php');
+    exit();
+};
 ?>
 
 
@@ -90,10 +120,24 @@ $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
     <link rel="stylesheet" href="<?php echo $url; ?>css/login.css">
 
     <script src="<?php echo $url; ?>js/index.js" defer></script>
-    <script src="<?php echo $url; ?>js/passwordReset.js" defer></script>
+    <script src="<?php echo $url; ?>js/resetPassword.js" defer></script>
 </head>
 
 <body>
+    <?php
+    echo <<<EOT
+        <script>
+            const student = {
+                studentNumber: "{$student['studentNumber']}",
+                firstName: "{$student['firstName']}",
+                lastName: "{$student['lastName']}",
+                email: "{$student['email']}",
+            };
+
+            const key = "$key";
+        </script>
+    EOT;
+    ?>
     <div id="main">
         <div id="loginPanel">
             <div id="header">
@@ -108,25 +152,23 @@ $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/';
 
             <form id="loginForm">
                 <div class="textInput">
-                    <label for="studentNumber">
-                        <h6>Student Number</h6>
+                    <label for="password">
+                        <h6>Password</h6>
                     </label>
-                    <input required type="text" name="studentNumber" id="studentNumber" placeholder="20-00001">
+                    <input required type="password" name="password" id="password" placeholder="#############">
                 </div>
 
                 <div class="textInput">
-                    <label for="emailAddress">
-                        <h6>Email</h6>
+                    <label for="confirmPassword">
+                        <h6>Confirm Password</h6>
                     </label>
-                    <input required type="email" name="emailAddress" id="emailAddress" placeholder="example@gmail.com">
+                    <input required type="password" name="confirmPassword" id="confirmPassword" placeholder="#############">
                 </div>
 
                 <button type="button" class="button" id="reset">
                     <p><b>Reset</b></p>
                 </button>
             </form>
-
-            <p class="postscript"><i>New here? <a href="register.php">Register instead</i></a></p>
         </div>
     </div>
 </body>

@@ -58,6 +58,12 @@ body::after {
 	align-items: center;
 	background-color: var(--color-plain);
 }
+@media screen and (max-width: 50rem) {
+	#registerPanel {
+		padding: 4rem 4rem;
+		width: 100%;
+	}
+}
 #main #header {
 	gap: 0.8rem;
 	display: flex;
@@ -89,14 +95,16 @@ body::after {
 }
 #registerForm > span .textInput {
 	width: 18rem;
+	max-width: 100%;
 }
 @media screen and (max-width: 50rem) {
 	#registerForm > span {
 		flex-direction: column;
 	}
-	#registerForm > span .textInput,
-	#registerForm > span .dropdown {
-		width: 100%;
-		max-width: 50rem;
+
+	.textInput,
+	.dropdown {
+		width: 100% !important;
+		max-width: 100% !important;
 	}
 }

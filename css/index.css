@@ -99,7 +99,7 @@ p {
 }
 p.postscript {
 	width: 100%;
-	font-size: 1.5rem;
+	font-size: 1.75rem;
 	display: inline-block;
 }
 @media screen and (max-width: 70rem) {
@@ -261,9 +261,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .button:disabled {
 	filter: invert(0.25);
 }
-.button:disabled::after {
-	display: none;
-}
 .button.sub {
 	color: var(--color-secondary) !important;
 }
@@ -273,6 +270,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 .button:hover {
 	filter: unset;
+}
+.button:disabled:hover {
+	filter: invert(0.25);
 }
 .button * {
 	position: relative;

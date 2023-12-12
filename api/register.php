@@ -196,7 +196,7 @@ if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
 
 // Validate year and section
 $yearPattern = "/^[0-9]{1}$/";
-$sectionPattern = "/^[A-Z]{1}$/";
+$sectionPattern = "/^[a-zA-Z]{1}$/";
 if (!preg_match($yearPattern, $year) || !preg_match($sectionPattern, $section)) {
     echo <<<EOT
         {
