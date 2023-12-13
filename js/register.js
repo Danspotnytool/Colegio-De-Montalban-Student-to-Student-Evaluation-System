@@ -2,13 +2,13 @@
 const registerForm = document.getElementById('registerForm');
 const registerButton = document.getElementById('register');
 
-reset.addEventListener('click', (e) => {
+registerButton.addEventListener('click', (e) => {
     e.preventDefault();
     const warning = document.getElementById('warning');
     if (warning) {
         warning.remove();
     };
-    reset.disabled = true;
+    registerButton.disabled = true;
 
     const formData = new FormData(registerForm);
 
@@ -44,6 +44,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Please fill out all fields';
         alertUser('Invalid', 'Please fill out all fields', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -51,6 +52,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Passwords do not match';
         alertUser('Invalid', 'Passwords do not match', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -59,6 +61,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Profile picture is too large';
         alertUser('Invalid', 'Profile picture is too large', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -69,6 +72,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Invalid student number';
         alertUser('Invalid', 'Invalid student number', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -82,6 +86,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Invalid Gender';
         alertUser('Invalid', 'Invalid Gender', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -102,6 +107,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Invalid Course';
         alertUser('Invalid', 'Invalid Course', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -115,6 +121,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Invalid birthday';
         alertUser('Invalid', 'Invalid birthday', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -124,6 +131,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Invalid email address';
         alertUser('Invalid', 'Invalid email address', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -135,6 +143,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Invalid year and section';
         alertUser('Invalid', 'Invalid year and section', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
     // Separate year and section
@@ -148,6 +157,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Password must be at least 8 characters long';
         alertUser('Invalid', 'Password must be at least 8 characters long', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
     // Password must contain at least one uppercase letter
@@ -156,6 +166,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Password must contain at least one uppercase letter';
         alertUser('Invalid', 'Password must contain at least one uppercase letter', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
     // Password must contain at least one lowercase letter
@@ -164,6 +175,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Password must contain at least one lowercase letter';
         alertUser('Invalid', 'Password must contain at least one lowercase letter', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
     // Password must contain at least one number
@@ -172,6 +184,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Password must contain at least one number';
         alertUser('Invalid', 'Password must contain at least one number', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
     // Password must contain at least one special character
@@ -180,6 +193,7 @@ reset.addEventListener('click', (e) => {
         postscript.textContent = 'Password must contain at least one special character';
         alertUser('Invalid', 'Password must contain at least one special character', 'warning');
         registerForm.insertBefore(postscript, registerForm.children[registerForm.children.length - 1]);
+        registerButton.disabled = false;
         return;
     };
 
@@ -227,7 +241,7 @@ reset.addEventListener('click', (e) => {
             .then(response => response.text())
             .then((res) => {
                 console.log(res);
-                reset.disabled = false;
+                registerButton.disabled = false;
                 /** @type {import("../utils/types.js").Response} */
                 const response = JSON.parse(res);
                 if (response.code === 200) {

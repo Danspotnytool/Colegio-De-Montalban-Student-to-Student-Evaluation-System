@@ -80,6 +80,7 @@ OR  section LIKE '$section'
 OR  email LIKE '$search'
 ) AND NOT studentNumber = '$studentNumber'";
 $students = mysqli_query($databaseConnection, $query);
+$studentNumber = $student['studentNumber'];
 
 if (!$students) {
     echo <<<EOT
@@ -108,14 +109,12 @@ echo <<<EOT
 EOT;
 
 
-
 // System logs
 $time = time();
 $path = $_SERVER['REQUEST_URI'];
 $HTTP_X_FORWARDED_FOR = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
 $HTTP_CLIENT_IP = $_SERVER['REMOTE_ADDR'] ?? '';
 $USER_AGENT = $_SERVER['HTTP_USER_AGENT'] ?? '';
-$studentNumber = $student['studentNumber'];
 $content = <<<EOT
     {
         "time": $time,
